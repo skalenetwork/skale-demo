@@ -29,7 +29,7 @@ Demo dApp designed as a proof of concept for deploying simple smart contracts to
 
 + [nodeJS](https://nodejs.org/en/download/)
 + [Truffle](https://truffleframework.com/)
-+ [SKALE Chain](https://github.com/GalacticExchange/skale-bundle)
++ [SKALE Chain](https://discord.gg/vvUtWJB)
 + [MetaMask](https://metamask.io/)
 
 <a name="run"></a>
@@ -38,13 +38,13 @@ Demo dApp designed as a proof of concept for deploying simple smart contracts to
 Open a terminal, and...
 
 1. Make sure **[nodeJS 8.11.3](https://nodejs.org/en/download/ "nodeJS 8.11.3")** is installed and running
-2. Make sure [SKALE Chain](https://github.com/GalacticExchange/skale-bundle) is installed and running
+2. Make sure [SKALE Chain](https://discord.gg/vvUtWJB) is running
 3. Make sure [Truffle](https://truffleframework.com/) is installed 
 4. Make sure [MetaMask](https://metamask.io/) is installed in your browser
 5. **Clone this project to your desktop**
  
     ``` 
-    git clone --recursive https://github.com/GalacticExchange/skale-demo.git
+    git clone --recursive https://github.com/skalenetwork/skale-demo.git
     cd skale-demo
     ```
     
