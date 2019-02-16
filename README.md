@@ -1,7 +1,7 @@
 
 
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/GalacticExchange/skale-demo.svg)](http://isitmaintained.com/project/GalacticExchange/skale-demo "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/GalacticExchange/skale-demo.svg)](http://isitmaintained.com/project/GalacticExchange/skale-demo "Percentage of issues still open")
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/skalenetwork/skale-demo.svg)](http://isitmaintained.com/project/skalenetwork/skale-demo "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/skalenetwork/skale-demo.svg)](http://isitmaintained.com/project/skalenetwork/skale-demo "Percentage of issues still open")
 
 # SKALE: Rock Paper Scissors dApp
 ### Table of Contents
