@@ -1,0 +1,93 @@
+.filestorage {
+  .image-container {
+    width: 200px;
+  }
+  .fileUpload {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  .fileUpload + label {
+    max-width: 80%;
+    font-size: 26px;
+    /* 20px */
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+    /* 10px 20px */
+  }
+
+  .fileUpload + label * {
+      /* pointer-events: none; */
+      /* in case of FastClick lib use */
+  }
+
+  .fileUpload + label svg {
+      width: 1em;
+      height: 1em;
+      vertical-align: middle;
+      fill: currentColor;
+      margin-top: -0.25em;
+      /* 4px */
+      margin-right: 0.25em;
+      /* 4px */
+  }
+
+  .fileUpload + label {
+    color: #d9e021;
+  }
+
+  .fileUpload:focus + label,
+  .fileUpload.has-focus + label,
+  .fileUpload + label:hover {
+      color: #d9e021;
+  }
+
+  .bottom {
+    position: fixed;
+    width: 100%;
+    bottom: 50px;
+    left: 0;
+  }
+  .cakeMade {
+    margin: auto;
+    position: absolute;
+    left: 27%;
+  }
+  .cakeShow {
+    position: absolute;
+    background-color: #000000f2;
+    z-index: 100000;
+    width: 100%;
+    height: 80%;
+  }
+}
+
+.rps-choice {
+  display: inline-block;
+  margin:50px;
+  width: 225px;
+}
+
+.dropdown-menu {
+  background-color: #00000078;
+  left: -65px !important;
+}
+
+.dropdown-item {
+  color: #d9e021;
+  font-size: 24px;
+}
+
+.dropdown-item:hover {
+  background-color: transparent;
+  color: #d9e021;
+  transform: scale(1.1);
+}
