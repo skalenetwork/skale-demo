@@ -18,6 +18,15 @@ Demo dApp designed as a proof of concept for using SKALE's file storage feature.
 ```
 npm install
 ```
+
++ Update `.env` file with your credentials.
+
+```
+ACCOUNT=[YOUR_ACCOUNT]
+PRIVATE_KEY=[YOUR_PRIVATE_KEY]
+SKALE_CHAIN=[YOUR_SKALE_CHAIN_ENDPOINT]
+```
+
 + Run the app locally
 
 ```
