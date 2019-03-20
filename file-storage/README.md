@@ -1,5 +1,5 @@
 
-# SKALE: File Storage dApp
+# SKALE File Storage Demo
 
 **Learn More**
 > **[SKALE File Storage Documentation](https://developers.skalelabs.com/file-storage/)**
