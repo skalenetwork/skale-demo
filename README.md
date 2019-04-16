@@ -1,6 +1,6 @@
 # SKALE Demo Code Examples
 
-SKALE is an open-source, fully decentralized, layer 2 scaling network. Nodes in the SKALE Network are placed into SKALE chains (S-chains) in a random, cryptographically secure manner. The nodes work together to run a fast, asynchronous consensus with fast finality. S-chains are capable of performing state updates by messaging each other and the main Ethereum chain using BLS threshold signatures. The result is a decentralized, cost-effective, secure, and easy to use layer 2 scaling environment.
+SKALE is an open-source, fully decentralized, layer 2 scaling network. Nodes in the SKALE Network are placed into SKALE Chains in a random, cryptographically secure manner. The nodes work together to run a fast, asynchronous consensus with fast finality. SKALE Chains are capable of performing state updates by messaging each other and the main Ethereum chain using BLS threshold signatures. The result is a decentralized, cost-effective, secure, and easy to use layer 2 scaling environment.
 
  
 **Learn More**
