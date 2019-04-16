@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
         let reader = new FileReader();
 
         reader.onload = async function(e) {
-            let link = await upload(
+            await upload(
               file.name, 
               file.size, 
               reader.result

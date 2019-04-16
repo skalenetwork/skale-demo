@@ -18,12 +18,12 @@ const mapDispatchToProps = (dispatch) => {
         let reader = new FileReader();
 
         reader.onload = async function(e) {
-            let link = await upload(
-              file.name, 
-              file.size, 
-              reader.result
-            );
-            getFiles();
+          await upload(
+            file.name, 
+            file.size, 
+            reader.result
+          );
+          getFiles();
         };
         reader.readAsArrayBuffer(file);
     },

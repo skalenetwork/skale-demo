@@ -31,40 +31,21 @@ export function setWeb3Mainnet() {
   store.dispatch(web3Mainnet());
 }
 
-function getKTMAccount(web3, results, dispatch, resolve) {
-  var account = {address: "0x936Fd804FEDf1cd42606b8ab72Ee2C86895C974b"};
-  web3.eth.getBalance("0x936Fd804FEDf1cd42606b8ab72Ee2C86895C974b")
-    .then(function(balance) {
-      account.balance = parseFloat(web3.utils.fromWei(balance, 'ether'));
-      results.ktmAccount = account;
-      console.log(results);
-      resolve(store.dispatch(web3Initialized(results)));
-  }).catch(function(err) {
-    console.log(err.message);
-    results.ktmAccount = account;
-
-    console.log('Injected web3 detected.');
-    resolve(store.dispatch(web3Initialized(results)));
-  }); 
-}
-
 export let getWeb3 = new Promise(function(resolve, reject) {
   // Wait for loading completion to avoid race conditions with web3 injection timing.
   window.addEventListener('load', function(dispatch) {
     var results, account;
     var web3 = window.web3;
 
-    var providerSKALE = new Web3.providers.HttpProvider(process.env.SKALE_CHAIN)
+    var providerSKALE = new Web3.providers.HttpProvider(process.env.SKALE_CHAIN);
     var web3SKALE = new Web3(providerSKALE);
-
-    var providerKTM = new Web3.providers.HttpProvider(process.env.KTM)
-    var web3KTM = new Web3(providerKTM);
-
 
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
     if (typeof web3 !== 'undefined') {
       // Use Mist/MetaMask's provider.
+
       web3 = new Web3(web3.currentProvider);
+
        // Get current ethereum wallet.
       web3.eth.getCoinbase((error, coinbase) => {
         // Log errors, if any.
@@ -78,21 +59,22 @@ export let getWeb3 = new Promise(function(resolve, reject) {
             results = {
               web3Instance: web3,
               web3SKALE: web3SKALE,
-              web3KTM: web3KTM,
               account: account
             }
-            getKTMAccount(web3KTM, results, dispatch, resolve);
+            console.log('Injected web3 detected.');
+            resolve(store.dispatch(web3Initialized(results)))
         }).catch(function(err) {
           console.log(err.message);
           results = {
             web3Instance: web3,
             web3SKALE: web3SKALE,
-            web3KTM: web3KTM,
             account: account
           }
-          getKTMAccount(web3KTM, results, dispatch, resolve);
+          console.log('Injected web3 detected.');
+          resolve(store.dispatch(web3Initialized(results)))
         }); 
-      });
+        
+      })
     } 
   })
 })

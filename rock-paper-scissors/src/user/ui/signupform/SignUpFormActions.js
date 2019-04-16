@@ -1,8 +1,7 @@
 import AuthenticationContract from '../../../../build/contracts/Authentication.json'
 import { loginUser } from '../loginbutton/LoginButtonActions'
 import store from '../../../store'
-
-const contract = require('truffle-contract')
+import contract from 'truffle-contract'
 
 export function signUpUser(name) {
   let web3 = store.getState().web3.web3Instance
@@ -14,7 +13,6 @@ export function signUpUser(name) {
       // Using truffle-contract we create the authentication object.
       const authentication = contract(AuthenticationContract)
       authentication.setProvider(web3.currentProvider)
-
 
       // Declaring this for later so we can chain functions on Authentication.
       var authenticationInstance

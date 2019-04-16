@@ -1,5 +1,4 @@
 import store from '../../store'
-import path from 'path'
 import { showMessage, hideMessage } from './../status/StatusActions'
 
 export const UPDATE_FILES = 'UPDATE_FILES'
@@ -13,7 +12,7 @@ function updateFiles(results) {
 
 export async function deleteFile(address, fileName) {
   let filestorage = store.getState().web3.filestorage;
-  let pivateKey = process.env.PRIVATE_KEY;
+  let pivateKey = '0x' + process.env.PRIVATE_KEY;
   showMessage("Deleting your file.");
   await filestorage.deleteFile(address, fileName, true, pivateKey);
   getFiles();
@@ -36,8 +35,8 @@ export async function preLoad(link, index) {
 }
 
 export async function upload(fileName, fileSize, fileData){
-  let {web3Instance, account, filestorage} = store.getState().web3;
-  let pivateKey = process.env.PRIVATE_KEY;
+  let {account, filestorage} = store.getState().web3;
+  let pivateKey = '0x' + process.env.PRIVATE_KEY;
   showMessage("Uploading your image.");
   await filestorage.uploadFile(account, fileName, fileSize, fileData, true, pivateKey);
   hideMessage();

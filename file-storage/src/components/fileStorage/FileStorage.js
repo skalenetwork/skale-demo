@@ -3,7 +3,6 @@ import {formatBytes} from './../../utils/utils'
 import './styles.scss';
 import image from './../../assets/placeholder-image.png'
 import file from './../../assets/placeholder-file.png'
-import movie from './../../assets/placeholder-movie.png'
 
 class FileStorage extends Component {
 

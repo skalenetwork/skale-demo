@@ -1,5 +1,4 @@
 import store from '../../store'
-import { PortisProvider } from 'portis';
 import Web3 from 'web3'
 
 import FilestorageClient from '@skalenetwork/filestorage-js';
@@ -17,6 +16,10 @@ export let getWeb3 = new Promise(function(resolve, reject) {
   var web3SKALE = new Web3(web3Provider);
 
   const web3 = window.web3;
+
+  //fix sendAsync issue
+  web3.providers.HttpProvider.prototype.sendAsync = 
+    web3.providers.HttpProvider.prototype.send;
 
   let filestorage = new FilestorageClient(web3SKALE);
     

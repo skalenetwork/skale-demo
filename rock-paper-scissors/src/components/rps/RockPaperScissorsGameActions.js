@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router'
 import store from '../../store'
 
 const contract = require('truffle-contract')
-const count = 1000;
+let count = 1000;
 export const DISPLAY_WINNER = 'DISPLAY_WINNER'
 function setWinner(winner) {
   return {
@@ -24,48 +24,6 @@ function showWinnerScreen(show_winner_screen) {
 
 export function registerPlayer() {
   return browserHistory.push('/demo/rps')
-  let web3 = store.getState().web3.web3Instance;
-
-  // Double-check web3's status.
-  if (typeof web3 !== 'undefined') {
-
-    return function(dispatch) {
-      // Using truffle-contract we create the RockPaperScissors object.
-      const rps = contract(RockPaperScissorsContract);
-      rps.setProvider(web3.currentProvider);
-
-      // Declaring this for later so we can chain functions on RockPaperScissors.
-      var rpsInstance;
-
-      // Get current ethereum wallet.
-      web3.eth.getCoinbase((error, coinbase) => {
-        // Log errors, if any.
-        if (error) {
-          console.error(error);
-        }
-
-        rps.deployed().then(function(instance) {
-          rpsInstance = instance
-          // Attempt to make choice.
-          rpsInstance.register(name, {from: coinbase})
-          .then(function(result) {
-            // If no error, update ui.
-            console.log('User Registered!');
-
-            return browserHistory.push('/demo/rps')
-
-          })
-          .catch(function(result) {
-            // If error...
-            console.log(result);
-            console.error('Wallet ' + coinbase + ' does not have enough money!')
-          })
-        })
-      })
-    }
-  } else {
-    console.error('Web3 is not initialized.');
-  }
 }
 
 export function makeChoice(value) {

@@ -1,5 +1,4 @@
 import store from '../../store'
-import path from 'path'
 
 export const SHOW_STATUS = 'SHOW_STATUS'
 function showStatus(results) {

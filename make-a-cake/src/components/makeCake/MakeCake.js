@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import {formatBytes} from './../../utils/utils'
 import './styles.scss';
-import image from './../../assets/transparent.png'
 
 import eggs from './../../assets/eggs.png'
 import flour from './../../assets/flour.png'
@@ -9,9 +7,7 @@ import milk from './../../assets/milk.png'
 import fruit from './../../assets/fruit.png'
 import cheese from './../../assets/cheese.png'
 
-import cheesecake from './../../assets/cheesecake.png'
 import fruitcake from './../../assets/fruitcake.png'
-import tiramisu from './../../assets/tiramisu.png'
 
 class MakeCake extends Component {
 
@@ -21,16 +17,16 @@ class MakeCake extends Component {
 
   close (event) {
     event.preventDefault();
-    var skaleOn = document.getElementById("cakeShow").classList.add("disable"); 
+    document.getElementById("cakeShow").classList.add("disable"); 
   }
 
   render() {
-    const {account, files, ingredients} = this.props;
+    const {account, files} = this.props;
     
     return (
       <div className="filestorage">
       <div className="center cakeShow" id="cakeShow" onClick={(event) => this.close(event)}>
-        <img className="cakeMade" id="cakeMade" onClick={(event) => this.close(event)} src={fruitcake} />
+        <img className="cakeMade" alt="cake" id="cakeMade" onClick={(event) => this.close(event)} src={fruitcake} />
       </div>
         <h1 className="underline-yellow mb-5">Have Your Cake</h1>
         <div className="center">
@@ -65,16 +61,16 @@ class MakeCake extends Component {
         <div className="row justify-content-center">
           <div className="col-12 py-5 center">
             <a onClick={(event) => this.props.onDelete(event, 0)}>
-              <img className="rps" id="ingredient_0"/>
+              <img className="rps" alt=""  id="ingredient_0"/>
             </a>
             <a onClick={(event) => this.props.onDelete(event, 1)}>
-              <img className="rps" id="ingredient_1"/>
+              <img className="rps" alt="" id="ingredient_1"/>
             </a>
             <a onClick={(event) => this.props.onDelete(event, account, 2)}>
-              <img className="rps" id="ingredient_2"/>
+              <img className="rps" alt="" id="ingredient_2"/>
             </a>
             <a onClick={(event) => this.props.onDelete(event, account, 2)}>
-              <img className="rps" id="ingredient_3"/>
+              <img className="rps" alt="" id="ingredient_3"/>
             </a>
           </div>
         </div>

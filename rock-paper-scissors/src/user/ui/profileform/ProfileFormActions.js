@@ -1,7 +1,6 @@
 import AuthenticationContract from '../../../../build/contracts/Authentication.json'
 import store from '../../../store'
-
-const contract = require('truffle-contract')
+import contract from 'truffle-contract'
 
 export const USER_UPDATED = 'USER_UPDATED'
 function userUpdated(user) {

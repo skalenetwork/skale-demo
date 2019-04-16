@@ -41,8 +41,7 @@ class Payment extends Component {
   }
 
   render() {
-    const {transactions, address, balance, addressKTM, balanceKTM, depositValue} = this.state;
-    const reverseData = transactions.map((v, k) => (Object.assign({}, v, v)));  
+    const {address, balance, addressKTM, balanceKTM, depositValue} = this.state;
     return(
       <div className="row justify-content-around">
         <div className="col-sm-6">

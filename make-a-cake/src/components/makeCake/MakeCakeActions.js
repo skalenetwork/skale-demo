@@ -1,7 +1,5 @@
 import BakeryContract from '../../../build/contracts/Bakery.json'
-
 import store from '../../store'
-import path from 'path'
 import { showMessage, hideMessage } from './../status/StatusActions'
 import contract from 'truffle-contract'
 const Tx = require('ethereumjs-tx');
@@ -12,7 +10,7 @@ import tiramisu from './../../assets/tiramisu.png'
 
 
 export async function makeCake(name){
-  let {account, web3Instance, skale} = store.getState().web3;
+  let {web3Instance, skale} = store.getState().web3;
 
   if(skale) {
     makeCakeSkaled(name);
@@ -53,7 +51,6 @@ export async function makeCakeSkaled(name){
 
   showMessage("Making Your Cake.");
   const accounts = await web3Instance.eth.getAccounts()
-  const [address] = accounts;
 
   let contract = new web3Instance.eth.Contract(BakeryContract.abi, "0x7CFd21fefb89DABCB60983c8A00665Da8654DD5C");
   let makeCake = contract.methods.newCake(name).encodeABI();  
@@ -74,22 +71,22 @@ export async function makeCakeSkaled(name){
     //sign transaction
     const tx = new Tx(rawTx);
     tx.sign(privateKey);
-    const serializedTx = tx.serialize();
+    tx.serialize();
 
     //send signed transaction
-    web3Instance.eth.sendTransaction(rawTx).
-      on('receipt', receipt => {
+    web3Instance.eth.sendTransaction(tx)
+      .on('receipt', receipt => {
         console.log(receipt);
         updateCakeAgain();
         hideMessage();
-     }).
-      catch(console.error);
+     })
+      .catch(console.error);
   });
 }
 
 
 export async function upload(fileName, fileSize, fileData){
-  let {web3Instance, account, filestorage} = store.getState().web3;
+  let {account, filestorage} = store.getState().web3;
   let privateKey = "0x" + process.env.PRIVATE_KEY;
   showMessage("Adding new ingredient.");
 
