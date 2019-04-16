@@ -16,3 +16,4 @@ EXAMPLE | CODE EXAMPLE |
 Rock Paper Scissors Demo | [rock-paper-scissors](rock-paper-scissors) |
 Cake Recipe Demo | [make-a-cake](make-a-cake) |
 File Storage Demo | [file-storage](file-storage) |
+Block Explorer | [block-explorer](block-explorer) |
