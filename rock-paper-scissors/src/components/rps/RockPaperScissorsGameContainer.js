@@ -4,7 +4,6 @@ import { registerPlayer, soloPlay, computerPlay, gameReset } from './RockPaperSc
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    player: state.user.data.name,
     winner: state.game.winner,
     showWinner: state.game.displayWinner,
   }

@@ -127,7 +127,7 @@
 .btn-toggle.btn-lg:before,
 .btn-toggle.btn-lg:after {
   line-height: 2.5rem;
-  width: 5rem;
+  width: 125px;
   text-align: center;
   font-weight: 600;
   font-size: 1rem;
@@ -139,11 +139,13 @@
 }
 .btn-toggle.btn-lg:before {
   content: 'One Player';
-  left: -9rem;
+  left: -145px;;
+
 }
 .btn-toggle.btn-lg:after {
   content: 'Computer vs Computer';
-  right: -7rem;
+  width: 275px;
+  right: -275px;
   opacity: 0.5;
   color: #bdc1c8;
 }

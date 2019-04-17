@@ -35,7 +35,7 @@ export async function preLoad(link, index) {
 }
 
 export async function upload(fileName, fileSize, fileData){
-  let {account, filestorage} = store.getState().web3;
+  let {web3Instance, account, filestorage} = store.getState().web3;
   let pivateKey = '0x' + process.env.PRIVATE_KEY;
   showMessage("Uploading your image.");
   await filestorage.uploadFile(account, fileName, fileSize, fileData, true, pivateKey);

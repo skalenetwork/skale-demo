@@ -244,47 +244,6 @@ img.rps {
   font-weight: 700;
 }
 
-.transactions {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 60px 10px 0;
-  box-shadow: 2px 0px 11px #29ABE1;
-  height: 100vh;
-  width: 300px;
-  background-color: #000000;
-  overflow: hidden;
-}
-
-.card {
-  background-color: #1a1a1a;
-}
-
-.accordion {
-  padding-top: 0px;
-}
-.card-header {
-  padding: 5px;
-  text-align: center;
-  color: #29ABE1;
-  font-family: 'Space Mono', monospace;
-  .btn {
-    text-decoration: none;
-  }
-  h5 {
-    color: #29ABE1;
-
-  }
-}
-
-.card-body {
-  font-size: 11px;
-}
-
-.contentWindow {
-  margin-right: 300px;
-}
-
 .border-primary {
   border-color: transparent !important;
   box-shadow: 1px 4px 8px #29AB

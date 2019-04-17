@@ -34,47 +34,19 @@ export function setWeb3Mainnet() {
 export let getWeb3 = new Promise(function(resolve, reject) {
   // Wait for loading completion to avoid race conditions with web3 injection timing.
   window.addEventListener('load', function(dispatch) {
-    var results, account;
     var web3 = window.web3;
-
-    var providerSKALE = new Web3.providers.HttpProvider(process.env.SKALE_CHAIN);
-    var web3SKALE = new Web3(providerSKALE);
 
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
     if (typeof web3 !== 'undefined') {
-      // Use Mist/MetaMask's provider.
+
+      //fix sendAsync issue
+      web3.providers.HttpProvider.prototype.sendAsync = 
+        web3.providers.HttpProvider.prototype.send;
 
       web3 = new Web3(web3.currentProvider);
 
-       // Get current ethereum wallet.
-      web3.eth.getCoinbase((error, coinbase) => {
-        // Log errors, if any.
-        if (error) {
-          console.error(error);
-        }
-        account = {address: coinbase};
-        web3.eth.getBalance(account.address)
-          .then(function(balance) {
-            account.balance = parseFloat(web3.utils.fromWei(balance, 'ether'));
-            results = {
-              web3Instance: web3,
-              web3SKALE: web3SKALE,
-              account: account
-            }
-            console.log('Injected web3 detected.');
-            resolve(store.dispatch(web3Initialized(results)))
-        }).catch(function(err) {
-          console.log(err.message);
-          results = {
-            web3Instance: web3,
-            web3SKALE: web3SKALE,
-            account: account
-          }
-          console.log('Injected web3 detected.');
-          resolve(store.dispatch(web3Initialized(results)))
-        }); 
-        
-      })
+      resolve(store.dispatch(web3Initialized({web3Instance: web3})));
+
     } 
   })
 })

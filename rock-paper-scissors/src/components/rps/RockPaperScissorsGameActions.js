@@ -1,8 +1,8 @@
 import RockPaperScissorsContract from '../../../build/contracts/RockPaperScissors.json'
 import { browserHistory } from 'react-router'
 import store from '../../store'
+import contract from 'truffle-contract'
 
-const contract = require('truffle-contract')
 let count = 1000;
 export const DISPLAY_WINNER = 'DISPLAY_WINNER'
 function setWinner(winner) {
@@ -155,6 +155,12 @@ export function soloPlay(value, computerChoice) {
       const rps = contract(RockPaperScissorsContract);
       rps.setProvider(web3.currentProvider);
 
+      rps.currentProvider.sendAsync = function() {
+        return rps.currentProvider.send.apply(
+          rps.currentProvider, arguments
+        );
+      };
+
       // Declaring this for later so we can chain functions on RockPaperScissors.
       var rpsInstance;
       // Get current ethereum wallet.
@@ -207,6 +213,12 @@ export function getWinner(value) {
       // Using truffle-contract we create the RockPaperScissors object.
       const rps = contract(RockPaperScissorsContract)
       rps.setProvider(web3.currentProvider)
+
+      rps.currentProvider.sendAsync = function() {
+        return rps.currentProvider.send.apply(
+          rps.currentProvider, arguments
+        );
+      };
 
       // Declaring this for later so we can chain functions on RockPaperScissors.
       var rpsInstance

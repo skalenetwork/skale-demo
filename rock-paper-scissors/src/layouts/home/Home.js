@@ -3,10 +3,10 @@ import { browserHistory } from 'react-router'
 
 class Home extends Component {
 
-  handleSubmit(event, choice) {
+  handleSubmit(event) {
     event.preventDefault()
 
-    return browserHistory.push('/signup')
+    return browserHistory.push('/demo')
   }
 
   render() {
@@ -19,7 +19,7 @@ class Home extends Component {
           <p>Fast execution of transaction for your blockchain application!</p>
           <p>Secure platform for sending, storing, and maintaining your user data!</p>
           <br/>
-          <button onClick={(event) => this.handleSubmit(event, "rock")} 
+          <button onClick={(event) => this.handleSubmit(event)} 
             className="btn btn-outline-primary yellow-button">Start Demo</button>
         </div>
       </main>

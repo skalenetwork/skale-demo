@@ -6,10 +6,6 @@ import nodes from './../../assets/reversed.gif'
 import skale_logo from './../../assets/Skale_Logo_White.png'
 
 class Demo extends Component {
-  constructor(props, { authData }) {
-    super(props)
-    authData = this.props
-  }
 
   render() {
     return(
@@ -18,7 +14,7 @@ class Demo extends Component {
           <div className="nodes" onClick={registerPlayer} style={{backgroundImage: 'url(' + nodes + ')'}}>
             <div className="center-both">
               <img className="medium" alt="SKALE Demo" src={skale_logo}/>
-              <p className="text-shadowbox"><strong>Hello {this.props.authData.name}!</strong>
+              <p className="text-shadowbox"><strong>Hello User!</strong>
                 <br/>Let's play a game.
               </p>
             </div>

@@ -19,7 +19,10 @@ export async function makeCake(name){
     showMessage("Making Your Cake.");
 
     const cake = contract(BakeryContract);
+    console.log(cake)
     cake.setProvider(web3Instance.currentProvider);
+
+    web3Instance.eth.getCoinbase().then(console.log);
 
     // Get current ethereum wallet.
     web3Instance.eth.getCoinbase((error, coinbase) => {
@@ -27,6 +30,7 @@ export async function makeCake(name){
       if (error) {
         console.error(error);
       }
+      console.log(coinbase)
 
       cake.deployed().then( async function(instance) {
         instance.newCake(name, {from: coinbase})
@@ -52,7 +56,7 @@ export async function makeCakeSkaled(name){
   showMessage("Making Your Cake.");
   const accounts = await web3Instance.eth.getAccounts()
 
-  let contract = new web3Instance.eth.Contract(BakeryContract.abi, "0x7CFd21fefb89DABCB60983c8A00665Da8654DD5C");
+  let contract = new web3Instance.eth.Contract(BakeryContract.abi, BakeryContract.networks[1].address);
   let makeCake = contract.methods.newCake(name).encodeABI();  
   console.log(contract)
   //get nonce
@@ -63,7 +67,7 @@ export async function makeCakeSkaled(name){
       from: accounts[0], 
       nonce: "0x" + nonce.toString(16),
       data : makeCake,
-      to: "0x7CFd21fefb89DABCB60983c8A00665Da8654DD5C",
+      to: BakeryContract.networks[1].address,
       gasPrice: 0,
       gas: 8000000
     };
@@ -131,11 +135,7 @@ export async function addIngredient(link) {
 export async function getFiles(){
   let {account, filestorage } = store.getState().web3;
   let files = await filestorage.getFileInfoByAddress(account);
-  let newFiles = files.filter(function (file) {
-  let ingredient = file.name.match(/(cheese|fruit|chocolate)/i) ? true : false;
-    return ingredient;
-  });
-  store.dispatch(updateFiles(newFiles));
+  console.log(files)
 }
 
 

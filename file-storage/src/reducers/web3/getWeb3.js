@@ -19,7 +19,7 @@ export let getWeb3 = new Promise(function(resolve, reject) {
   web3.providers.HttpProvider.prototype.sendAsync = 
     web3.providers.HttpProvider.prototype.send;
 
-  let filestorage = new FilestorageClient(web3);
+  let filestorage = new FilestorageClient(web3, true);
     
   resolve(store.dispatch(web3Initialized({
     web3: web3, 
