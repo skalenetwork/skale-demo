@@ -14,7 +14,7 @@ export async function deleteFile(address, fileName) {
   let filestorage = store.getState().web3.filestorage;
   let pivateKey = '0x' + process.env.PRIVATE_KEY;
   showMessage("Deleting your file.");
-  await filestorage.deleteFile(address, fileName, true, pivateKey);
+  await filestorage.deleteFile(address, fileName, pivateKey);
   getFiles();
   hideMessage();
 }
@@ -22,29 +22,29 @@ export async function deleteFile(address, fileName) {
 export async function download(link, index) {
   let filestorage = store.getState().web3.filestorage;
   showMessage("Downloading your file.");
-  await filestorage.downloadFileIntoBrowser(link, true);
+  await filestorage.downloadToFile(link);
   hideMessage();
 }
 
 export async function preLoad(link, index) {
   let filestorage = store.getState().web3.filestorage;
   showMessage("Loading your image.");
-  let file = await filestorage.downloadFileIntoBuffer(link, true);
+  let file = await filestorage.downloadToBuffer(link);
       document.getElementById("image_" + index).src = 'data:image/png;base64,' + file.toString('base64');
   hideMessage();
 }
 
-export async function upload(fileName, fileSize, fileData){
-  let {web3Instance, account, filestorage} = store.getState().web3;
+export async function upload(fileName, fileData){
+  let {account, filestorage} = store.getState().web3;
   let pivateKey = '0x' + process.env.PRIVATE_KEY;
   showMessage("Uploading your image.");
-  await filestorage.uploadFile(account, fileName, fileSize, fileData, true, pivateKey);
+  await filestorage.uploadFile(account, fileName, fileData, pivateKey);
   hideMessage();
 }
 
 export async function getFiles(){
   let {account, filestorage} = store.getState().web3;
-  let files = await filestorage.getFileInfoByAddress(account);
+  let files = await filestorage.getFileInfoListByAddress(account);
   store.dispatch(updateFiles(files));
 }
 
