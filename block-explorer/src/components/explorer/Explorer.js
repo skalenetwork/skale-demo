@@ -13,7 +13,7 @@ class Explorer extends Component {
       showBlock: false,
       showTransaction: false,
       block: {},
-      transaction: {},
+      transaction: {receipt: ""},
     }
 
   }
@@ -155,7 +155,7 @@ class Explorer extends Component {
                             To:</span></strong> {dataTx.to}
                           </div>
                           <div><strong><span className="border-bottom border-dark">
-                            Logs:</span></strong> {dataTx.receipt.logs ? dataTx.receipt.logs.toString() : dataTx.receipt.logs}
+                            Logs:</span></strong> { JSON.stringify(dataTx.receipt.logs, null, 4)}
                           </div>
                       </div>
                     </div>
@@ -231,7 +231,7 @@ class Explorer extends Component {
                                         To:</span></strong> {dataTx.to}
                                       </div>
                                       <div><strong><span className="border-bottom border-dark">
-                                        Logs:</span></strong> {dataTx.receipt.logs ? dataTx.receipt.logs.toString() : dataTx.receipt.logs}
+                                        Logs:</span></strong> { JSON.stringify(dataTx.receipt.logs, null, 4)}
                                       </div>
                                   </div>
                                 </div>
@@ -297,7 +297,7 @@ class Explorer extends Component {
                     To:</span></strong> {transaction.to}
                   </div>
                   <div><strong><span className="border-bottom border-dark">
-                    Logs:</span></strong> {transaction.receipt ? transaction.receipt.logs.toString() : ""}
+                    Logs:</span></strong> { JSON.stringify(transaction.receipt.logs, null, 4)}
                   </div>
                 </div>
                 <div className={"multi-collapse data-list " + (showTransaction ? "disable" : "")}>
@@ -328,7 +328,7 @@ class Explorer extends Component {
                               To:</span></strong> {data.to}
                             </div>
                             <div><strong><span className="border-bottom border-dark">
-                              Logs:</span></strong> {data.receipt.logs ? data.receipt.logs.toString() : data.receipt.logs}
+                              Logs:</span></strong> { JSON.stringify(data.receipt.logs, null, 4)}
                             </div>
                         </div>
                       </div>
