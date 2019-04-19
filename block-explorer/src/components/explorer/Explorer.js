@@ -71,7 +71,7 @@ class Explorer extends Component {
           <div className="col-md-6">
             <div className="accordion" id="dataBlock">
               <div className="list-group border-grey">
-              <button type="button" className="list-group-item list-group-item-action background-grey border-between text-white disabled">
+              <button type="button" className="list-group-item list-group-item-action background-grey border-between text-white">
                 <div className="row">
                   <div className="col-sm-3">
                     <h3 className="mb-3">Blocks</h3>
@@ -249,7 +249,7 @@ class Explorer extends Component {
           <div className="col-md-6">
             <div className="accordion" id="txBlock">
               <div className="list-group border-grey">
-              <button type="button" className="list-group-item list-group-item-action background-grey border-between text-white disabled">
+              <button type="button" className="list-group-item list-group-item-action background-grey border-between text-white">
                 <div className="row">
                   <div className="col-sm-3">
                     <h3 className="mb-3">Transactions</h3>
