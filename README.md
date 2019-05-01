@@ -13,7 +13,8 @@ Deploying to SKALE is similar to deploying to the Ethereum blockchain. There are
 
 EXAMPLE | CODE EXAMPLE | 
 ---|:---  | 
-Rock Paper Scissors Demo | [rock-paper-scissors](rock-paper-scissors) |
+Block Explorer | [block-explorer](block-explorer) |
 Cake Recipe Demo | [make-a-cake](make-a-cake) |
 File Storage Demo | [file-storage](file-storage) |
-Block Explorer | [block-explorer](block-explorer) |
+Money Transfer | [money-transfer](money-transfer) |
+Rock Paper Scissors Demo | [rock-paper-scissors](rock-paper-scissors) |
