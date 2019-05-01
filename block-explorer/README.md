@@ -5,8 +5,7 @@
 Block Explorer for seeing the blocks and transactions on your SKALE Chian.
 
 ### Run App Locally
-
-    
+ 
 + Install node packages
 
 ```

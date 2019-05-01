@@ -9,28 +9,6 @@ function web3Initialized(results) {
   }
 }
 
-export const WEB3_SKALE = 'WEB3_SKALE'
-function web3Skale() {
-  return {
-    type: WEB3_SKALE
-  }
-}
-
-export const WEB3_MAINNET = 'WEB3_MAINNET'
-function web3Mainnet() {
-  return {
-    type: WEB3_MAINNET
-  }
-}
-
-export function setWeb3Skale() { 
-  store.dispatch(web3Skale());
-}
-
-export function setWeb3Mainnet() { 
-  store.dispatch(web3Mainnet());
-}
-
 export let getWeb3 = new Promise(function(resolve, reject) {
   // Wait for loading completion to avoid race conditions with web3 injection timing.
   window.addEventListener('load', function(dispatch) {

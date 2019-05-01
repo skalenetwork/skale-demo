@@ -12,9 +12,9 @@ function updateFiles(results) {
 
 export async function deleteFile(address, fileName) {
   let filestorage = store.getState().web3.filestorage;
-  let pivateKey = '0x' + process.env.PRIVATE_KEY;
+  let privateKey = '0x' + process.env.PRIVATE_KEY;
   showMessage("Deleting your file.");
-  await filestorage.deleteFile(address, fileName, pivateKey);
+  await filestorage.deleteFile(address, fileName, privateKey);
   getFiles();
   hideMessage();
 }
@@ -36,9 +36,9 @@ export async function preLoad(link, index) {
 
 export async function upload(fileName, fileData){
   let {account, filestorage} = store.getState().web3;
-  let pivateKey = '0x' + process.env.PRIVATE_KEY;
+  let privateKey = '0x' + process.env.PRIVATE_KEY;
   showMessage("Uploading your image.");
-  await filestorage.uploadFile(account, fileName, fileData, pivateKey);
+  await filestorage.uploadFile(account, fileName, fileData, privateKey);
   hideMessage();
 }
 

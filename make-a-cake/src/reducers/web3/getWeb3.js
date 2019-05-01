@@ -1,7 +1,7 @@
 import store from '../../store'
 import Web3 from 'web3'
 
-import FilestorageClient from '@skalenetwork/filestorage-js';
+import FilestorageClient from '@skalenetwork/filestorage.js';
 
 export const WEB3_INITIALIZED = 'WEB3_INITIALIZED'
 function web3Initialized(results) {

@@ -23,7 +23,7 @@ function showWinnerScreen(show_winner_screen) {
 
 
 export function registerPlayer() {
-  return browserHistory.push('/demo/rps')
+  return browserHistory.push('/demo/rps');
 }
 
 export function makeChoice(value) {

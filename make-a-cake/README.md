@@ -8,8 +8,7 @@ Demo dApp to use during the ETH Paris hackathon.
 
 ### Run App Locally
 
-> Compatible with MetaMask 6.1.0 or lower
-
+> Compatible with [MetaMask 6.1.0](https://github.com/MetaMask/metamask-extension/releases/tag/v6.1.0) or lower
     
 + Install node packages
 

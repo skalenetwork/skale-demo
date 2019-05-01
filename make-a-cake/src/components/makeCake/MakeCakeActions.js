@@ -1,5 +1,7 @@
 import BakeryContract from '../../../build/contracts/Bakery.json'
+
 import store from '../../store'
+import path from 'path'
 import { showMessage, hideMessage } from './../status/StatusActions'
 import contract from 'truffle-contract'
 const Tx = require('ethereumjs-tx');
@@ -10,7 +12,7 @@ import tiramisu from './../../assets/tiramisu.png'
 
 
 export async function makeCake(name){
-  let {web3Instance, skale} = store.getState().web3;
+  let {account, web3Instance, skale} = store.getState().web3;
 
   if(skale) {
     makeCakeSkaled(name);
@@ -19,10 +21,7 @@ export async function makeCake(name){
     showMessage("Making Your Cake.");
 
     const cake = contract(BakeryContract);
-    console.log(cake)
     cake.setProvider(web3Instance.currentProvider);
-
-    web3Instance.eth.getCoinbase().then(console.log);
 
     // Get current ethereum wallet.
     web3Instance.eth.getCoinbase((error, coinbase) => {
@@ -30,7 +29,6 @@ export async function makeCake(name){
       if (error) {
         console.error(error);
       }
-      console.log(coinbase)
 
       cake.deployed().then( async function(instance) {
         instance.newCake(name, {from: coinbase})
@@ -54,56 +52,61 @@ export async function makeCakeSkaled(name){
   let privateKey = new Buffer(process.env.PRIVATE_KEY, 'hex');
 
   showMessage("Making Your Cake.");
-  const accounts = await web3Instance.eth.getAccounts()
 
-  let contract = new web3Instance.eth.Contract(BakeryContract.abi, BakeryContract.networks[1].address);
-  let makeCake = contract.methods.newCake(name).encodeABI();  
-  console.log(contract)
-  //get nonce
-  web3Instance.eth.getTransactionCount(account).then(nonce => {
-    
-    //create raw transaction
-    const rawTx = {
-      from: accounts[0], 
-      nonce: "0x" + nonce.toString(16),
-      data : makeCake,
-      to: BakeryContract.networks[1].address,
-      gasPrice: 0,
-      gas: 8000000
-    };
+  const cake = contract(BakeryContract);
+  web3Instance.providers.HttpProvider.prototype.sendAsync = 
+    web3Instance.providers.HttpProvider.prototype.send;
+  
+  cake.setProvider(web3Instance.currentProvider);
 
-    //sign transaction
-    const tx = new Tx(rawTx);
-    tx.sign(privateKey);
-    tx.serialize();
+  cake.deployed().then(async function(instance) {
+    let contract = new web3Instance.eth.Contract(instance.abi, instance.address);
+    let makeCake = contract.methods.newCake(name).encodeABI();  
 
-    //send signed transaction
-    web3Instance.eth.sendTransaction(tx)
-      .on('receipt', receipt => {
-        console.log(receipt);
-        updateCakeAgain();
-        hideMessage();
-     })
-      .catch(console.error);
-  });
+    //get nonce
+    web3Instance.eth.getTransactionCount(account).then(nonce => {
+      
+      //create raw transaction
+      const rawTx = {
+        from: account, 
+        nonce: "0x" + nonce.toString(16),
+        data : makeCake,
+        to: instance.address,
+        gasPrice: 0,
+        gas: 8000000
+      };
+
+      //sign transaction
+      const tx = new Tx(rawTx);
+      tx.sign(privateKey);
+      const serializedTx = tx.serialize();
+
+      //send signed transaction
+      web3Instance.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).
+        on('receipt', receipt => {
+          console.log(receipt);
+          updateCakeAgain();
+          hideMessage();
+       }).
+        catch(console.error);
+    });
+  })
 }
 
 
 export async function upload(fileName, fileSize, fileData){
-  let {account, filestorage} = store.getState().web3;
-  let privateKey = "0x" + process.env.PRIVATE_KEY;
+  let {web3Instance, account, filestorage} = store.getState().web3;
+  let privateKey = process.env.PRIVATE_KEY_FILESTORAGE;
   showMessage("Adding new ingredient.");
-
-  await filestorage.uploadFile(account, fileName, fileSize, fileData, true, privateKey);
-
+  await filestorage.uploadFile(account, fileName, fileData, privateKey);
   hideMessage();
 }
 
 export async function deleteFile(address, fileName) {
   let filestorage = store.getState().web3.filestorage;
-  let privateKey = "0x" + process.env.PRIVATE_KEY;
+  let privateKey = process.env.PRIVATE_KEY_FILESTORAGE;
   showMessage("Deleting your ingredient.");
-  await filestorage.deleteFile(address, fileName, true, privateKey);
+  await filestorage.deleteFile(address, fileName, privateKey);
   getFiles();
   hideMessage();
 }
@@ -111,7 +114,7 @@ export async function deleteFile(address, fileName) {
 export async function download(link, index) {
   let filestorage = store.getState().web3.filestorage;
   showMessage("Downloading your file.");
-  await filestorage.downloadFileIntoBrowser(link, true);
+  await filestorage.downloadToFile(link);
   hideMessage();
 }
 
@@ -119,7 +122,7 @@ export async function preLoad(link) {
   let {ingredients} = store.getState().web3;
   let filestorage = store.getState().web3.filestorage;
   showMessage("Adding your ingredient.");
-  let file = await filestorage.downloadFileIntoBuffer(link, true);
+  let file = await filestorage.downloadToBuffer(link);
   document.getElementById("ingredient_" + ingredients).src = 'data:image/png;base64,' + file.toString('base64');
   store.dispatch(useIngredient("1"));
   hideMessage();
@@ -134,8 +137,12 @@ export async function addIngredient(link) {
 
 export async function getFiles(){
   let {account, filestorage } = store.getState().web3;
-  let files = await filestorage.getFileInfoByAddress(account);
-  console.log(files)
+  let files = await filestorage.getFileInfoListByAddress(account);
+  let newFiles = files.filter(function (file) {
+  let ingredient = file.name.match(/(cheese|fruit|chocolate)/i) ? true : false;
+    return ingredient;
+  });
+  store.dispatch(updateFiles(newFiles));
 }
 
 
