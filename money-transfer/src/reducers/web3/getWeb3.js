@@ -1,5 +1,7 @@
 import store from '../../store'
 import Web3 from 'web3'
+import privateTestnetJson from "./contracts/private_skale_testnet_proxy.json"
+import schainJson from "./contracts/schain_proxy.json"
 
 export const WEB3_INITIALIZED = 'WEB3_INITIALIZED'
 function web3Initialized(results) {
@@ -12,8 +14,6 @@ function web3Initialized(results) {
 export let getWeb3 = new Promise(function(resolve, reject) {
   // Wait for loading completion to avoid race conditions with web3 injection timing.
   window.addEventListener('load', function(dispatch) {
-    const web3Provider = new Web3.providers.HttpProvider(process.env.SKALE_CHAIN);
-    var web3SKALE = new Web3(web3Provider);
 
     let web3 = new Web3.providers.HttpProvider(process.env.PRIVATE_MAINNET);
 
@@ -24,8 +24,8 @@ export let getWeb3 = new Promise(function(resolve, reject) {
 
       resolve(store.dispatch(web3Initialized({
         web3Instance: web3,
-        web3SKALE: web3SKALE,
-        web3Mainnet: web3,
+        privateTestnetJson: privateTestnetJson,
+        schainJson: schainJson
       })));
 
     } 

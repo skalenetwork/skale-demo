@@ -1,7 +1,5 @@
 import store from '../../store'
 import Web3 from 'web3'
-import privateTestnetJson from "./contracts/private_skale_testnet_proxy.json"
-import schainJson from "./contracts/schain_proxy.json"
 
 import { showMessage, hideMessage } from './../status/StatusActions'
 
@@ -23,13 +21,97 @@ export function addTransactions(transaction) {
   }
 }
 
-async function getBalances(dispatch) {
-  let {web3Instance, web3SKALE} = store.getState().web3;
+export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT'
+export function accountUpdate(account) {
+  return {
+    type: UPDATE_ACCOUNT,
+    payload: account
+  }
+}
 
-  let account = process.env.ACCOUNT;
+export const UPDATE_ENDPOINT = 'UPDATE_ENDPOINT'
+export function endpointUpdate(endpoint) {
+  return {
+    type: UPDATE_ENDPOINT,
+    payload: endpoint
+  }
+}
+
+export const UPDATE_ENDPOINT_SKALE = 'UPDATE_ENDPOINT_SKALE'
+export function endpointSkaleUpdate(endpointSkale) {
+  return {
+    type: UPDATE_ENDPOINT_SKALE,
+    payload: endpointSkale
+  }
+}
+
+export const UPDATE_PRIVATE_KEY = 'UPDATE_PRIVATE_KEY'
+export function privateKeyUpdate(privateKey) {
+  return {
+    type: UPDATE_PRIVATE_KEY,
+    payload: privateKey
+  }
+}
+
+export const UPDATE_SKALE_ID = 'UPDATE_SKALE_ID'
+export function skaleIdUpdate(skaleId) {
+  return {
+    type: UPDATE_SKALE_ID,
+    payload: skaleId
+  }
+}
+
+export const UPDATE_TOKEN_ADDRESS = 'UPDATE_TOKEN_ADDRESS'
+export function tokenAddressUpdate(tokenAddress) {
+  return {
+    type: UPDATE_TOKEN_ADDRESS,
+    payload: tokenAddress
+  }
+}
+
+export function updateAccount(account) {
+  return function(dispatch) {
+    dispatch(accountUpdate(account));
+  }
+}
+
+export function updateEndpoint(endpoint) {
+  return function(dispatch) {
+    dispatch(endpointUpdate(endpoint));
+  }
+}
+
+export function updateEndpointSkale(endpointSkale) {
+  return function(dispatch) {
+    dispatch(endpointSkaleUpdate(endpointSkale));
+  }
+}
+
+export function updatePrivateKey(privateKey) {
+  return function(dispatch) {
+    dispatch(privateKeyUpdate(privateKey));
+  }
+}
+
+export function updateSkaleId(skaleId) {
+  return function(dispatch) {
+    dispatch(skaleIdUpdate(skaleId));
+  }
+}
+
+export function updateTokenAddress(tokenAddress) {
+  return function(dispatch) {
+    dispatch(tokenAddressUpdate(tokenAddress));
+  }
+}
+
+async function getBalances(dispatch) {
+  let {web3Instance, account, endpointSkale, privateTestnetJson, tokenManagerAddress} = store.getState().web3;
+
+  const web3Provider = new Web3.providers.HttpProvider(endpointSkale);
+  const web3SKALE = new Web3(web3Provider);
 
   const depositBoxAddress = privateTestnetJson.deposit_box_address;
-  const tokenManagerAddress = schainJson.token_manager_address;
 
   let schainBalance = await web3SKALE.eth.getBalance(account);
   let mainnetBalance = await web3Instance.eth.getBalance(account);
@@ -52,10 +134,11 @@ export function refreshBalances() {
 }
 
 export function deposit(amount) {
-  let privateKey = new Buffer(process.env.PRIVATE_KEY, 'hex')
-  let account = process.env.ACCOUNT;
-  let privateSkaleTestnetEndpoint = process.env.PRIVATE_MAINNET;
-  let schainID = process.env.SKALE_ID;
+  let {privateKey, endpoint, skaleId, account, privateTestnetJson} = store.getState().web3;
+  
+  privateKey = new Buffer(privateKey, 'hex')
+  let privateSkaleTestnetEndpoint = endpoint;
+  let schainID = skaleId;
 
   const depositBoxAddress = privateTestnetJson.deposit_box_address;
   const abi = privateTestnetJson.deposit_box_abi;
@@ -111,11 +194,11 @@ export function deposit(amount) {
 }
 
 export function exit(amount) {
-  let privateKey = new Buffer(process.env.PRIVATE_KEY, 'hex')
-  let account = process.env.ACCOUNT;
-  let schainEndpoint = process.env.SKALE_CHAIN;
+  let {privateKey, endpointSkale, skaleId, account, schainJson, tokenManagerAddress} = store.getState().web3;
+  
+  privateKey = new Buffer(privateKey, 'hex');
+  let schainEndpoint = endpointSkale;
 
-  const tokenManagerAddress = schainJson.token_manager_address;
   const abi = schainJson.token_manager_abi;
 
   const web3 = new Web3(new Web3.providers.HttpProvider(schainEndpoint));
