@@ -45,11 +45,10 @@ async function getBalances(dispatch) {
 }
 
 export function refreshBalances() {
-  return function(dispatch) {
-    setTimeout(function() {
-      getBalances(dispatch);
-    }, 2000);
-  }
+  getBalances(store.dispatch);
+  setTimeout(function() {
+    refreshBalances(store.dispatch);
+  }, 2000);
 }
 
 export function deposit(amount) {

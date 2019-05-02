@@ -16,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onRefreshBalances: () => {
-      dispatch(refreshBalances());
+      refreshBalances();
     },
     onDeposit: (event, amount) => {
       event.preventDefault();

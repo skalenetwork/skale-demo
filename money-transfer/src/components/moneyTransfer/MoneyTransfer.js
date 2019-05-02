@@ -18,7 +18,9 @@ class MoneyTransfer extends Component {
   }
 
   componentDidMount(){
-    this.props.onRefreshBalances();
+    setTimeout(function() {
+      this.props.onRefreshBalances();
+    }.bind(this), 2000);
   }
 
   handleChangeExit(event) {
