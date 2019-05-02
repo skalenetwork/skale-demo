@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {getWeb3} from './reducers/web3/getWeb3'
-import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
@@ -23,7 +22,6 @@ getWeb3
 
 class App extends Component {
   render() {
-    const skaled = store.getState().web3.skale;
     return (
       <div className="App">
         <div className="content">

@@ -194,7 +194,7 @@ export function deposit(amount) {
 }
 
 export function exit(amount) {
-  let {privateKey, endpointSkale, skaleId, account, schainJson, tokenManagerAddress} = store.getState().web3;
+  let {privateKey, endpointSkale, account, schainJson, tokenManagerAddress} = store.getState().web3;
   
   privateKey = new Buffer(privateKey, 'hex');
   let schainEndpoint = endpointSkale;
