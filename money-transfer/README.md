@@ -1,5 +1,5 @@
 
-# SKALE Cake Demo
+# SKALE Money Transfer Demo
 
 # Introduction
 
