@@ -1,0 +1,14 @@
+.money-transfer {
+  .payment-form {
+    border: 1px solid #29ABE1;
+    .form-control {
+      background-color: #1a1a1a;
+      border:  #1a1a1a;
+      color: #29ABE1;
+    }
+    ::placeholder {
+      color: #29abe191;
+    }
+    overflow: hidden;
+  }
+}

@@ -3,34 +3,18 @@ const initialState = {
   web3Instance: null,
   web3Mainnet: null,
   web3SKALE: null,
-  account: null,
-  filestorage: null,
-  files: [],
-  ingredients: 0,
+  depositBoxBalance: null,
+  mainnetBalance: null,
+  schainBalance: null,
 }
 
 const web3Reducer = (state = initialState, action) => {
   if (action.type === 'WEB3_INITIALIZED')
   {
     return Object.assign({}, state, {
-      web3Instance: action.payload.web3,
-      web3Mainnet: action.payload.web3,
+      web3Instance: action.payload.web3Instance,
+      web3Mainnet: action.payload.web3Instance,
       web3SKALE: action.payload.web3SKALE,
-      account: action.payload.account,
-      filestorage: action.payload.filestorage,
-    })
-  }
-  if (action.type === 'UPDATE_FILES')
-  {
-    return Object.assign({}, state, {
-      files: action.payload
-    })
-  }
-  if (action.type === 'USE_INGREDIENT')
-  {
-    console.log(state.ingredients++)
-    return Object.assign({}, state, {
-      ingredients: state.ingredients++
     })
   }
   if (action.type === 'WEB3_SKALE')
@@ -48,6 +32,15 @@ const web3Reducer = (state = initialState, action) => {
       files: [],
     })
   }
+  if (action.type === 'UPDATE_BALANCES')
+  {
+    return Object.assign({}, state, {
+      depositBoxBalance: action.payload.depositBoxBalance,
+      mainnetBalance: action.payload.mainnetBalance,
+      schainBalance: action.payload.schainBalance,
+    })
+  }
+
   return state
 }
 
