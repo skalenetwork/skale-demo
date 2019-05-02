@@ -2,8 +2,9 @@ const initialState = {
   skale: false,
   web3Instance: null,
   web3Mainnet: null,
-  web3SKALE: null,
+  WEB3_SKALE: null,
   depositBoxBalance: null,
+  tokenManagerBalance: null,
   mainnetBalance: null,
   schainBalance: null,
 }
@@ -36,6 +37,7 @@ const web3Reducer = (state = initialState, action) => {
   {
     return Object.assign({}, state, {
       depositBoxBalance: action.payload.depositBoxBalance,
+      tokenManagerBalance: action.payload.tokenManagerBalance,
       mainnetBalance: action.payload.mainnetBalance,
       schainBalance: action.payload.schainBalance,
     })

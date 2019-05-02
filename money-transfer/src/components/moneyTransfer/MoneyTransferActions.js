@@ -1,8 +1,9 @@
 import store from '../../store'
 import Web3 from 'web3'
 import privateTestnetJson from "./contracts/private_skale_testnet_proxy.json"
-import { showMessage, hideMessage } from './../status/StatusActions'
 import schainJson from "./contracts/schain_proxy.json"
+
+import { showMessage, hideMessage } from './../status/StatusActions'
 
 const Tx = require('ethereumjs-tx');
 
@@ -28,13 +29,17 @@ async function getBalances(dispatch) {
   let account = process.env.ACCOUNT;
 
   const depositBoxAddress = privateTestnetJson.deposit_box_address;
+  const tokenManagerAddress = schainJson.token_manager_address;
+
   let schainBalance = await web3SKALE.eth.getBalance(account);
   let mainnetBalance = await web3Instance.eth.getBalance(account);
   let depositBoxBalance = await web3Instance.eth.getBalance(depositBoxAddress);
+  let tokenManagerBalance = await web3SKALE.eth.getBalance(tokenManagerAddress);
   dispatch(updateBalances({
     depositBoxBalance: web3Instance.utils.fromWei(depositBoxBalance, 'ether'),
     mainnetBalance: web3Instance.utils.fromWei(mainnetBalance, 'ether'),
     schainBalance: web3Instance.utils.fromWei(schainBalance, 'ether'),
+    tokenManagerBalance: web3Instance.utils.fromWei(tokenManagerBalance, 'ether'),    
   }));
 
 }

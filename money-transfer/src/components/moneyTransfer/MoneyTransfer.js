@@ -30,7 +30,7 @@ class MoneyTransfer extends Component {
   }
 
   render() {
-    const {depositBoxBalance, mainnetBalance, schainBalance, transactionDataSchain, transactionDataMainnet} = this.props;
+    const {depositBoxBalance, tokenManagerBalance, mainnetBalance, schainBalance, transactionDataSchain, transactionDataMainnet} = this.props;
     const {exitValue, depositValue} = this.state;
     return(
       <div className="money-transfer h-100 pb-5">
@@ -61,6 +61,12 @@ class MoneyTransfer extends Component {
                 <div className="payment-form px-4 py-2 rounded">
                   <small id="addressHelp" className="form-text text-white center">
                     <span className="yellow">Total:</span> {depositBoxBalance}
+                  </small>
+                </div>
+                <h4 className="text-center pt-4">Token Manager</h4>
+                <div className="payment-form px-4 py-2 rounded">
+                  <small id="addressHelp" className="form-text text-white center">
+                    <span className="yellow">Total:</span> {tokenManagerBalance}
                   </small>
                 </div>
             </div>

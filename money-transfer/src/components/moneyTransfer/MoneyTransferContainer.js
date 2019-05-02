@@ -6,6 +6,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     transactionDataMainnet: state.transactions.transactionDataMainnet,
     transactionDataSchain: state.transactions.transactionDataSchain,
+    tokenManagerBalance: state.web3.tokenManagerBalance,
     depositBoxBalance: state.web3.depositBoxBalance,
     mainnetBalance: state.web3.mainnetBalance,
     schainBalance: state.web3.schainBalance,
