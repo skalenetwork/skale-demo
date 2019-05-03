@@ -59,13 +59,9 @@ async function getBalance(dispatch) {
   let {endpoint, account} = store.getState().web3;
   
   const web3 = new Web3(new Web3.providers.HttpProvider(endpoint));
-
-  if(typeof web3 !== 'undefined' && account !== "" && web3.utils.checkAddressChecksum(account)){
-
-    let balance = await web3.eth.getBalance(account);
-    
+  if(typeof web3 !== 'undefined' && account !== ""){
+    const balance = await web3.eth.getBalance(account);
     dispatch(updateBalance(web3.utils.fromWei(balance, 'ether')));
-
   }
 }
 
