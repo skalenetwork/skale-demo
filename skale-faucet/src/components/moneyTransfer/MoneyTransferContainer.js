@@ -1,16 +1,20 @@
 import { connect } from 'react-redux'
 import MoneyTransfer from './MoneyTransfer'
-import {updateAccount, updateEndpoint, updateSkaleId, sendETH} from './MoneyTransferActions'
+import {refreshBalance, updateAccount, updateEndpoint, updateSkaleId, sendETH} from './MoneyTransferActions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
     account: state.web3.account,
     endpoint: state.web3.endpoint,
+    balance: state.web3.balance,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onRefreshBalance: () => {
+      refreshBalance();
+    },
     onUpdateAccount: (accountData) => {
       event.preventDefault();
       dispatch(updateAccount(accountData));

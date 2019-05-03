@@ -10,6 +10,12 @@ class MoneyTransfer extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount(){
+    setTimeout(function() {
+      this.props.onRefreshBalance();
+    }.bind(this), 2000);
+  }
+
   handleChangeAccount(event) {
     this.props.onUpdateAccount(event.target.value);
   }
@@ -23,7 +29,7 @@ class MoneyTransfer extends Component {
   }
 
   render() {
-    const {account, endpoint} = this.props;
+    const {account, endpoint, balance} = this.props;
     return(
       <div className="money-transfer h-100 pb-5">
         <div className="center margin50">
@@ -58,6 +64,7 @@ class MoneyTransfer extends Component {
                 value={account}
                 onChange={(event) => this.handleChangeAccount(event)}
               />
+              <small className="form-text text-center text-truncate"><span className="yellow">ETH Balance:</span> {balance}</small>
             </div>
           </div> 
         </div> 

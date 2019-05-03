@@ -5,6 +5,14 @@ import { showMessage, hideMessage } from './../status/StatusActions'
 
 const Tx = require('ethereumjs-tx');
 
+export const UPDATE_BALANCE = 'UPDATE_BALANCE'
+export function updateBalance(balance) {
+  return {
+    type: UPDATE_BALANCE,
+    payload: balance
+  }
+}
+
 export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT'
 export function accountUpdate(account) {
   return {
@@ -47,6 +55,27 @@ export function updateSkaleId(skaleId) {
   }
 }
 
+async function getBalance(dispatch) {
+  let {endpoint, account} = store.getState().web3;
+  
+  const web3 = new Web3(new Web3.providers.HttpProvider(endpoint));
+
+  if(typeof web3 !== 'undefined' && account !== "" && web3.utils.checkAddressChecksum(account)){
+
+    let balance = await web3.eth.getBalance(account);
+    
+    dispatch(updateBalance(web3.utils.fromWei(balance, 'ether')));
+
+  }
+}
+
+export function refreshBalance() {
+  getBalance(store.dispatch);
+  setTimeout(function() {
+    refreshBalance(store.dispatch);
+  }, 2000);
+}
+
 export function sendETH() {
   let {endpoint, account} = store.getState().web3;
   
@@ -63,7 +92,7 @@ export function sendETH() {
       to: account,
       gasPrice: 0,
       gas: 8000000,
-      value: web3.utils.toHex(web3.utils.toWei("10", 'ether'))
+      value: web3.utils.toHex(web3.utils.toWei("0.5", 'ether'))
     }
 
     const tx = new Tx(rawTx);

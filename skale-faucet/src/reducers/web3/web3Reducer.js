@@ -2,6 +2,7 @@ const initialState = {
   account: "",
   endpoint: "",
   skaleId: "",
+  balance: "",
 }
 
 const web3Reducer = (state = initialState, action) => {
@@ -21,6 +22,12 @@ const web3Reducer = (state = initialState, action) => {
   {
     return Object.assign({}, state, {
       skaleId: action.payload,
+    })
+  }
+  if (action.type === 'UPDATE_BALANCE')
+  {
+    return Object.assign({}, state, {
+      balance: action.payload,
     })
   }
 
