@@ -18,7 +18,6 @@ export function addBlocks(blocks) {
 }
 
 async function getBlockData(dispatch, web3) {
-  let blocks = [];
   let nLatestBlockNumber = await web3.eth.getBlockNumber();
   let indexEnd = store.getState().transactions.lastBlock >= 0 ? 
     store.getState().transactions.lastBlock : (nLatestBlockNumber - 10);
@@ -37,18 +36,54 @@ async function getBlockData(dispatch, web3) {
 
           let transactions = [];
           transactions.push(transactionData);
-          dispatch(addTransactions(transactions))
+          dispatch(addTransactions({transactionData: transactions, reverse: true}));
         });            
       }
     } catch(e) { 
       console.log(e);
     }
+    let blocks = [];
     blocks.push(block);
+    dispatch(addBlocks({blocks: blocks, lastBlock: nLatestBlockNumber, reverse: true}));
   }
-  dispatch(addBlocks({blocks: blocks, lastBlock: nLatestBlockNumber}));
   setTimeout(function() {
     getBlockData(dispatch, web3);
   }, 1000);
+}
+
+async function getBlockDataPast(dispatch, web3) {
+  let {lastBlock} = store.getState().transactions
+  let nLatestBlockNumber = await web3.eth.getBlockNumber();
+  let indexEnd = lastBlock >= 0 ? lastBlock : (nLatestBlockNumber - 300);
+  //get recent block data
+  dispatch(addBlocks({blocks: [], lastBlock: nLatestBlockNumber, reverse: true}));
+  getBlockData(dispatch, web3);
+  //get past block data
+  for( var i = nLatestBlockNumber; i > indexEnd; -- i ) {
+    let block = await web3.eth.getBlock( i );
+    block.cntTransactions = 0;
+    block.transactionData = [];
+    try { 
+      block.cntTransactions = block.transactions.length;
+      if(block.cntTransactions > 0) {
+        block.transactions.forEach(async function(hash) {
+          let transactionData = await web3.eth.getTransaction(hash);
+          transactionData.receipt = await web3.eth.getTransactionReceipt(hash);
+          block.transactionData.push(transactionData);
+
+          let transactions = [];
+          transactions.push(transactionData);
+          dispatch(addTransactions({transactionData: transactions, reverse: false}))
+        });            
+      }
+    } catch(e) { 
+      console.log(e);
+    }
+    let blocks = [];
+    blocks.push(block);
+    dispatch(addBlocks({blocks: blocks, lastBlock: nLatestBlockNumber, reverse: false}));
+  }
+  
 }
 
 export function getBlocks(endpoint) {
@@ -56,7 +91,7 @@ export function getBlocks(endpoint) {
   let web3 = new Web3(web3Provider);
 
   return function(dispatch) {
-    getBlockData(dispatch, web3);
+    getBlockDataPast(dispatch, web3);
   }
   
 }
