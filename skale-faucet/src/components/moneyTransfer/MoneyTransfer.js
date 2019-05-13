@@ -33,7 +33,7 @@ class MoneyTransfer extends Component {
     return(
       <div className="money-transfer h-100 pb-5">
         <div className="center margin50">
-        <h1>SKALE Innovator Program Faucet</h1>
+        <h1>SKALE Faucet</h1>
         <br/>
         <p>To receive tokens for testing out your SKALE Chain</p>
         <p> please enter your SKALE Chain Endpoint, and wallet to receive ETH!</p>
