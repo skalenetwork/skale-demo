@@ -27,8 +27,6 @@ SKALE_CHAIN=[YOUR_SKALE_CHAIN_ENDPOINT]
 
 For example your .env file should look like:
 
-> Please note that the private key in your .env file should not contain the `0x` prefix
-
 ```
 ACCOUNT=0x1111111111111111111111111111111111111111
 PRIVATE_KEY=2222222222222222222222222222222222222222222222222222222222222222
