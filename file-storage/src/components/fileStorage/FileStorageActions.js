@@ -11,8 +11,8 @@ function updateFiles(results) {
 }
 
 export async function deleteFile(address, fileName) {
-  let filestorage = store.getState().web3.filestorage;
-  let privateKey = '0x' + process.env.PRIVATE_KEY;
+  let {filestorage, web3Instance} = store.getState().web3;
+  let privateKey = '0x' + web3Instance.utils.stripHexPrefix(process.env.PRIVATE_KEY);
   showMessage("Deleting your file.");
   await filestorage.deleteFile(address, fileName, privateKey);
   getFiles();
@@ -35,8 +35,8 @@ export async function preLoad(link, index) {
 }
 
 export async function upload(fileName, fileData){
-  let {account, filestorage} = store.getState().web3;
-  let privateKey = '0x' + process.env.PRIVATE_KEY;
+  let {account, filestorage, web3Instance} = store.getState().web3;
+  let privateKey = '0x' + web3Instance.utils.stripHexPrefix(process.env.PRIVATE_KEY);
   showMessage("Uploading your image.");
   await filestorage.uploadFile(account, fileName, fileData, privateKey);
   hideMessage();

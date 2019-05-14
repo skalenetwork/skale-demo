@@ -1,4 +1,5 @@
 
+
 # SKALE File Storage Demo
 
 **Learn More**
@@ -24,9 +25,19 @@ PRIVATE_KEY=[YOUR_PRIVATE_KEY]
 SKALE_CHAIN=[YOUR_SKALE_CHAIN_ENDPOINT]
 ```
 
+For example your .env file should look like:
+
+> Please note that the private key in your .env file should not contain the `0x` prefix
+
+```
+ACCOUNT=0x1111111111111111111111111111111111111111
+PRIVATE_KEY=2222222222222222222222222222222222222222222222222222222222222222
+SKALE_CHAIN=http://123.12.34.123:1234
+
+```
+
 + Run the app locally
 
 ```
 npm start
 ```
-    
