@@ -25,7 +25,7 @@ PRIVATE_KEY=[YOUR_PRIVATE_KEY]
 SKALE_CHAIN=[YOUR_SKALE_CHAIN_ENDPOINT]
 ```
 
-For example your .env file should look like:
+For example your `.env` file should look like:
 
 ```
 ACCOUNT=0x1111111111111111111111111111111111111111
