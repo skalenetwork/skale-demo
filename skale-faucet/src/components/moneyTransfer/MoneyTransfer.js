@@ -25,7 +25,11 @@ class MoneyTransfer extends Component {
   }
 
   handleSubmit(event) {
-    this.props.onSendETH(event);
+    let endpointVerify = /((http)|(ws):\/\/.*):(\d*)\/?/;
+    if(endpointVerify.test(this.props.endpoint)){
+      let endpoint = event.target.value.replace("https", "http");
+      this.props.onSendETH(event);
+    }
   }
 
   render() {

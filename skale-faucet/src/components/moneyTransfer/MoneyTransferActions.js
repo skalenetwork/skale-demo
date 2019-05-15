@@ -58,7 +58,7 @@ export function updateSkaleId(skaleId) {
 async function getBalance(dispatch) {
   let {endpoint, account} = store.getState().web3;
   
-  const web3 = new Web3(new Web3.providers.HttpProvider(endpoint));
+  const web3 = new Web3(endpoint);
   if(typeof web3 !== 'undefined' && account !== ""){
     const balance = await web3.eth.getBalance(account);
     dispatch(updateBalance(web3.utils.fromWei(balance, 'ether')));
@@ -77,7 +77,7 @@ export function sendETH() {
   
   let privateKey = new Buffer(process.env.PRIVATE_KEY, 'hex');
 
-  const web3 = new Web3(new Web3.providers.HttpProvider(endpoint));
+  const web3 = new Web3(endpoint);
 
   showMessage("Transfering ETH.");
 
