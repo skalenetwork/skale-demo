@@ -87,8 +87,7 @@ async function getBlockDataPast(dispatch, web3) {
 }
 
 export function getBlocks(endpoint) {
-  const web3Provider = new Web3.providers.HttpProvider(endpoint);
-  let web3 = new Web3(web3Provider);
+  let web3 = new Web3(endpoint);
 
   return function(dispatch) {
     getBlockDataPast(dispatch, web3);
@@ -97,8 +96,7 @@ export function getBlocks(endpoint) {
 }
 
 export function getBlock(endpoint, block, callback) {
-  const web3Provider = new Web3.providers.HttpProvider(endpoint);
-  let web3 = new Web3(web3Provider);
+  let web3 = new Web3(endpoint);
   web3.eth.getBlock(block).then(function(blockData) {
     blockData.cntTransactions = 0;
     blockData.transactionData = [];
@@ -119,8 +117,7 @@ export function getBlock(endpoint, block, callback) {
 }
 
 export function getTransaction(endpoint, hash, callback) {
-  const web3Provider = new Web3.providers.HttpProvider(endpoint);
-  let web3 = new Web3(web3Provider);
+  let web3 = new Web3(endpoint);
   web3.eth.getTransaction(hash).then(function(transaction) {
     web3.eth.getTransactionReceipt(hash).then(function(receipt) {
       transaction.receipt = receipt;
