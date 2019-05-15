@@ -20,10 +20,10 @@ class Explorer extends Component {
 
   handleChange(event) {
     event.preventDefault();
-    this.setState({ endpoint: event.target.value });
-    let endpointVerify = /((http)|(ws):\/\/.*):(\d*)\/?/;
-    if(endpointVerify.test(event.target.value)){
-      let endpoint = event.target.value.replace("https", "http");
+    let endpoint = event.target.value;
+    this.setState({ endpoint: endpoint });
+    let endpointVerify = /((https?)|(wss?):\/\/.*):(\d*)\/?/;
+    if(endpointVerify.test(endpoint)){
       this.props.onGetBlocks(endpoint);
     }
   }
