@@ -15,7 +15,7 @@ const transactionsReducer = (state = initialState, action) => {
   {
     return Object.assign({}, state, {
       blockData: action.payload.reverse ? action.payload.blocks.concat(state.blockData) : state.blockData.concat(action.payload.blocks),
-      lastBlock: action.payload.lastBlock
+      lastBlock: action.payload.lastBlock !== "" ? action.payload.lastBlock : state.lastBlock
     })
   }
   

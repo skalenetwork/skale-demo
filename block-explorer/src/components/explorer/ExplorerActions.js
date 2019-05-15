@@ -18,23 +18,23 @@ export function addBlocks(blocks) {
 }
 
 async function getBlockData(dispatch, web3) {
-  let nLatestBlockNumber = await web3.eth.getBlockNumber();
-  let indexEnd = store.getState().transactions.lastBlock >= 0 ? 
+  const nLatestBlockNumber = await web3.eth.getBlockNumber();
+  const indexEnd = store.getState().transactions.lastBlock >= 0 ? 
     store.getState().transactions.lastBlock : (nLatestBlockNumber - 10);
   for( var i = nLatestBlockNumber; i > indexEnd; -- i ) {
-    let block = await web3.eth.getBlock( i );
+    const block = await web3.eth.getBlock( i );
     block.cntTransactions = 0;
     block.transactionData = [];
     try { 
       block.cntTransactions = block.transactions.length;
       if(block.cntTransactions > 0) {
         block.transactions.forEach(async function(hash) {
-          let transactionData = await web3.eth.getTransaction(hash);
+          const transactionData = await web3.eth.getTransaction(hash);
           transactionData.receipt = await web3.eth.getTransactionReceipt(hash);
           console.log(transactionData)
           block.transactionData.push(transactionData);
 
-          let transactions = [];
+          const transactions = [];
           transactions.push(transactionData);
           dispatch(addTransactions({transactionData: transactions, reverse: true}));
         });            
@@ -42,36 +42,38 @@ async function getBlockData(dispatch, web3) {
     } catch(e) { 
       console.log(e);
     }
-    let blocks = [];
+    const blocks = [];
     blocks.push(block);
     dispatch(addBlocks({blocks: blocks, lastBlock: nLatestBlockNumber, reverse: true}));
   }
   setTimeout(function() {
     getBlockData(dispatch, web3);
-  }, 1000);
+  }, 3000);
 }
 
 async function getBlockDataPast(dispatch, web3) {
   let {lastBlock} = store.getState().transactions
-  let nLatestBlockNumber = await web3.eth.getBlockNumber();
-  let indexEnd = lastBlock >= 0 ? lastBlock : (nLatestBlockNumber - 300);
+  const nLatestBlockNumber = await web3.eth.getBlockNumber();
+  const indexEnd = lastBlock >= 0 ? lastBlock : (nLatestBlockNumber - 300);
   //get recent block data
   dispatch(addBlocks({blocks: [], lastBlock: nLatestBlockNumber, reverse: true}));
-  getBlockData(dispatch, web3);
+  setTimeout(function() {
+    getBlockData(dispatch, web3);
+  }, 2000);getBlockData(dispatch, web3);
   //get past block data
   for( var i = nLatestBlockNumber; i > indexEnd; -- i ) {
-    let block = await web3.eth.getBlock( i );
+    const block = await web3.eth.getBlock( i );
     block.cntTransactions = 0;
     block.transactionData = [];
     try { 
       block.cntTransactions = block.transactions.length;
       if(block.cntTransactions > 0) {
         block.transactions.forEach(async function(hash) {
-          let transactionData = await web3.eth.getTransaction(hash);
+          const transactionData = await web3.eth.getTransaction(hash);
           transactionData.receipt = await web3.eth.getTransactionReceipt(hash);
           block.transactionData.push(transactionData);
 
-          let transactions = [];
+          const transactions = [];
           transactions.push(transactionData);
           dispatch(addTransactions({transactionData: transactions, reverse: false}))
         });            
@@ -79,9 +81,9 @@ async function getBlockDataPast(dispatch, web3) {
     } catch(e) { 
       console.log(e);
     }
-    let blocks = [];
+    const blocks = [];
     blocks.push(block);
-    dispatch(addBlocks({blocks: blocks, lastBlock: nLatestBlockNumber, reverse: false}));
+    dispatch(addBlocks({blocks: blocks, lastBlock: "", reverse: false}));
   }
   
 }
