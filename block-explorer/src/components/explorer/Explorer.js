@@ -49,7 +49,7 @@ class Explorer extends Component {
 
   render() {
     const {endpoint, block, transaction, showBlock, showTransaction} = this.state;
-    const {blockData, transactionData} = this.props;
+    const {blockData, transactionData, filter} = this.props; 
     return(
       <div className="explorer h-100 pb-5">
         <div className="d-flex justify-content-center">
@@ -165,7 +165,7 @@ class Explorer extends Component {
               <div id="multiCollapseBlocks" className={"multi-collapse data-list " + (showBlock ? "disable" : "")}>
                 {blockData.map((data, index) => {
                   return (
-                    <div key={index} data-id={index}>
+                    <div style={{display: (filter ? (data.cntTransactions === 0 ? 'none': 'block') : 'block')}} key={index} data-id={index}>
                       <button className={"list-group-item list-group-item-action blue-button border-between " + ((index % 2) ? "background-grey" : "")} type="button" data-toggle="collapse" data-target={"#collapseData_" + index} aria-expanded="true" aria-controls={"collapseData_" + index}>
                         <div className="row">
                           <div className="col-3">

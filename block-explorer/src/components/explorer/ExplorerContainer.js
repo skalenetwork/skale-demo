@@ -5,7 +5,8 @@ import { getBlocks, getBlock, getTransaction } from './ExplorerActions'
 const mapStateToProps = (state, ownProps) => {
   return {
     blockData: state.transactions.blockData,
-    transactionData: state.transactions.transactionData
+    transactionData: state.transactions.transactionData,
+    filter: state.transactions.filter
   }
 }
 
