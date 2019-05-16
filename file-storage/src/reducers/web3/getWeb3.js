@@ -12,14 +12,9 @@ function web3Initialized(results) {
 }
 
 export let getWeb3 = new Promise(function(resolve, reject) {
-  const web3Provider = new Web3.providers.HttpProvider(process.env.SKALE_CHAIN);
-  let web3 = new Web3(web3Provider);
+  let web3 = new Web3(process.env.SKALE_CHAIN);
 
-  //fix sendAsync issue
-  web3.providers.HttpProvider.prototype.sendAsync = 
-    web3.providers.HttpProvider.prototype.send;
-
-  let filestorage = new FilestorageClient(web3, true);
+  let filestorage = new FilestorageClient(process.env.SKALE_CHAIN, true);
     
   resolve(store.dispatch(web3Initialized({
     web3: web3, 

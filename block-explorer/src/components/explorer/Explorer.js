@@ -290,10 +290,22 @@ class Explorer extends Component {
                     Contract Address:</span></strong> {transaction.receipt ? transaction.receipt.contractAddress : ""}
                   </div>
                   <div><strong><span className="border-bottom border-dark">
+                    Value:</span></strong> {transaction.value}
+                  </div>
+                  <div><strong><span className="border-bottom border-dark">
                     From:</span></strong> {transaction.from}
                   </div>
                   <div><strong><span className="border-bottom border-dark">
                     To:</span></strong> {transaction.to}
+                  </div>
+                  <div><strong><span className="border-bottom border-dark">
+                    Gas:</span></strong> {transaction.gas}
+                  </div>
+                  <div><strong><span className="border-bottom border-dark">
+                    Gas Price:</span></strong> {transaction.gasPrice}
+                  </div>
+                  <div><strong><span className="border-bottom border-dark">
+                    Input:</span></strong> {transaction.input}
                   </div>
                   <div><strong><span className="border-bottom border-dark">
                     Logs:</span></strong> { JSON.stringify(transaction.receipt.logs, null, 4)}
@@ -321,10 +333,22 @@ class Explorer extends Component {
                               Contract Address:</span></strong> {data.receipt.contractAddress}
                             </div>
                             <div><strong><span className="border-bottom border-dark">
+                              Value:</span></strong> {data.value}
+                            </div>
+                            <div><strong><span className="border-bottom border-dark">
                               From:</span></strong> {data.from}
                             </div>
                             <div><strong><span className="border-bottom border-dark">
                               To:</span></strong> {data.to}
+                            </div>
+                            <div><strong><span className="border-bottom border-dark">
+                              Gas:</span></strong> {data.gas}
+                            </div>
+                            <div><strong><span className="border-bottom border-dark">
+                              Gas Price:</span></strong> {data.gasPrice}
+                            </div>
+                            <div><strong><span className="border-bottom border-dark">
+                              Input:</span></strong> {data.input}
                             </div>
                             <div><strong><span className="border-bottom border-dark">
                               Logs:</span></strong> { JSON.stringify(data.receipt.logs, null, 4)}
