@@ -130,11 +130,11 @@ class Explorer extends Component {
                 {block.transactionData ? block.transactionData.map((dataTx, index) => {
                   return (
                     <div key={index} data-id={index}>
-                      <button className={"list-group-item list-group-item-action blue-button border-between text-truncate " + (filter ? '' : ((index % 2) ? "background-grey" : ""))} type="button" data-toggle="collapse" data-target={"#collapseDataTx_" + index} aria-expanded="true" aria-controls={"collapseDataTx_" + index}>
+                      <button className={"list-group-item list-group-item-action blue-button border-between text-truncate " + ((index % 2) ? "background-grey" : "")} type="button" data-toggle="collapse" data-target={"#collapseDataTx_" + index} aria-expanded="true" aria-controls={"collapseDataTx_" + index}>
                           {dataTx.hash}
                       </button>
 
-                      <div id={"collapseDataTx_" + index} className={"collapse transactionData pl-4 pt-1 pb-4 border-blue-top " + (filter ? '' : ((index % 2) ? "background-grey" : ""))} aria-labelledby={"headingTx_" + index} data-parent="#dataTxBlock">
+                      <div id={"collapseDataTx_" + index} className={"collapse transactionData pl-4 pt-1 pb-4 border-blue-top " + ((index % 2) ? "background-grey" : "")} aria-labelledby={"headingTx_" + index} data-parent="#dataTxBlock">
                           <div><strong><span className="border-bottom border-dark">
                             Hash:</span></strong> {dataTx.hash}
                           </div>
@@ -166,7 +166,7 @@ class Explorer extends Component {
                 {blockData.map((data, index) => {
                   return (
                     <div style={{display: (filter ? (data.cntTransactions === 0 ? 'none': 'block') : 'block')}} key={index} data-id={index}>
-                      <button className={"list-group-item list-group-item-action blue-button border-between " + ((index % 2) ? "background-grey" : "")} type="button" data-toggle="collapse" data-target={"#collapseData_" + index} aria-expanded="true" aria-controls={"collapseData_" + index}>
+                      <button className={"list-group-item list-group-item-action blue-button border-between " + (filter ? '' : ((index % 2) ? "background-grey" : ""))} type="button" data-toggle="collapse" data-target={"#collapseData_" + index} aria-expanded="true" aria-controls={"collapseData_" + index}>
                         <div className="row">
                           <div className="col-3">
                             {data.number}
@@ -180,7 +180,7 @@ class Explorer extends Component {
                         </div>
                       </button>
 
-                      <div id={"collapseData_" + index} className={"collapse blockData px-4 pt-1 pb-4 border-blue-top " + ((index % 2) ? "background-grey" : "")}  aria-labelledby={"headingData_" + index} data-parent="#dataBlock">
+                      <div id={"collapseData_" + index} className={"collapse blockData px-4 pt-1 pb-4 border-blue-top " + (filter ? '' : ((index % 2) ? "background-grey" : ""))}  aria-labelledby={"headingData_" + index} data-parent="#dataBlock">
                           <div><strong><span className="border-bottom border-dark">
                             Hash:</span></strong> {data.hash}
                           </div>
