@@ -13,8 +13,8 @@ class Home extends Component {
 
   render() {
     return(
-      <main className="container-fluid pt-5">
-        <div className="margin50 pt-5">
+      <main className="pt-5">
+        <div className="">
           <MakeCakeContainer/>
           <StatusContainer/>
         </div>

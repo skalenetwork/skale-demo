@@ -1,5 +1,9 @@
 const initialState = {
   skale: false,
+  portisOn: false,
+  bitskiOn: false,
+  bitski: null,
+  portis: null,
   web3Instance: null,
   web3Mainnet: null,
   web3SKALE: null,
@@ -18,6 +22,22 @@ const web3Reducer = (state = initialState, action) => {
       web3SKALE: action.payload.web3SKALE,
       account: action.payload.account,
       filestorage: action.payload.filestorage,
+      portis: action.payload.portis,
+      bitski: action.payload.bitski,
+    })
+  }
+  if (action.type === 'USE_PORTIS')
+  {
+    return Object.assign({}, state, {
+      web3Instance: action.payload,
+      portisOn: true
+    })
+  }
+  if (action.type === 'USE_BITSKI')
+  {
+    return Object.assign({}, state, {
+      web3Instance: action.payload,
+      bitskiOn: true
     })
   }
   if (action.type === 'UPDATE_FILES')
@@ -36,7 +56,7 @@ const web3Reducer = (state = initialState, action) => {
   if (action.type === 'WEB3_SKALE')
   {
     return Object.assign({}, state, {
-      web3Instance: state.web3SKALE,
+      web3Instance: state.web3Instance,
       skale: true,
     })
   }

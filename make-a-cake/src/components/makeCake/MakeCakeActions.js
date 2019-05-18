@@ -1,7 +1,6 @@
 import BakeryContract from '../../../build/contracts/Bakery.json'
 
 import store from '../../store'
-import path from 'path'
 import { showMessage, hideMessage } from './../status/StatusActions'
 import contract from 'truffle-contract'
 const Tx = require('ethereumjs-tx');
@@ -9,10 +8,10 @@ const Tx = require('ethereumjs-tx');
 import cheesecake from './../../assets/cheesecake.png'
 import fruitcake from './../../assets/fruitcake.png'
 import tiramisu from './../../assets/tiramisu.png'
-
+import redVelvet from './../../assets/red-velvet-many.png'
 
 export async function makeCake(name){
-  let {account, web3Instance, skale} = store.getState().web3;
+  let {web3Instance, skale} = store.getState().web3;
 
   if(skale) {
     makeCakeSkaled(name);
@@ -24,14 +23,14 @@ export async function makeCake(name){
     cake.setProvider(web3Instance.currentProvider);
 
     // Get current ethereum wallet.
-    web3Instance.eth.getCoinbase((error, coinbase) => {
+    web3Instance.eth.getAccounts((error, coinbase) => {
       // Log errors, if any.
       if (error) {
         console.error(error);
       }
 
       cake.deployed().then( async function(instance) {
-        instance.newCake(name, {from: coinbase})
+        instance.newCake(name, {from: coinbase[0]})
         .then(function(result) {
           updateCake();
           hideMessage();
@@ -54,10 +53,9 @@ export async function makeCakeSkaled(name){
   showMessage("Making Your Cake.");
 
   const cake = contract(BakeryContract);
-  web3Instance.providers.HttpProvider.prototype.sendAsync = 
-    web3Instance.providers.HttpProvider.prototype.send;
   
   cake.setProvider(web3Instance.currentProvider);
+  cake.currentProvider.sendAsync = cake.currentProvider.send;
 
   cake.deployed().then(async function(instance) {
     let contract = new web3Instance.eth.Contract(instance.abi, instance.address);
@@ -82,20 +80,20 @@ export async function makeCakeSkaled(name){
       const serializedTx = tx.serialize();
 
       //send signed transaction
-      web3Instance.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).
-        on('receipt', receipt => {
+      web3Instance.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
+        .on('receipt', receipt => {
           console.log(receipt);
           updateCakeAgain();
           hideMessage();
-       }).
-        catch(console.error);
+       })
+        .catch(console.error);
     });
   })
 }
 
 
 export async function upload(fileName, fileSize, fileData){
-  let {web3Instance, account, filestorage} = store.getState().web3;
+  let {account, filestorage} = store.getState().web3;
   let privateKey = process.env.PRIVATE_KEY_FILESTORAGE;
   showMessage("Adding new ingredient.");
   await filestorage.uploadFile(account, fileName, fileData, privateKey);
@@ -167,6 +165,8 @@ function useIngredient(results) {
 function updateCake() {
   if (document.getElementById("ingredient_3").src.match(/(cheese)/i)){
     document.getElementById("cakeMade").src = cheesecake;
+  } else if (document.getElementById("ingredient_3").src.match(/(chocolate)/i)){
+    document.getElementById("cakeMade").src = tiramisu;
   } else {
     document.getElementById("cakeMade").src = fruitcake;
   }
@@ -174,7 +174,7 @@ function updateCake() {
 }
 
 function updateCakeAgain() {
-  document.getElementById("cakeMade").src = tiramisu;
+  document.getElementById("cakeMade").src = redVelvet;
   document.getElementById("cakeShow").classList.remove("disable");
 }
 
