@@ -13,7 +13,7 @@ let privateKey = process.env.PRIVATE_KEY;
 
 let rinkeby = process.env.RINKEBY;
 
-let skale = "http://159.65.106.215:8035/";
+let skale = process.env.SKALE_CHAIN_TRUFFLE;
 
 module.exports = {
     networks: {
