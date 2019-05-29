@@ -13,7 +13,7 @@ let privateKey = process.env.PRIVATE_KEY;
 
 let rinkeby = process.env.RINKEBY;
 
-let skale = process.env.SKALE_CHAIN_TRUFFLE;
+let skale = process.env.SKALE_CHAIN;
 
 module.exports = {
     networks: {
