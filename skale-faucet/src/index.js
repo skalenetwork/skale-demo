@@ -9,6 +9,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 // Layouts
 import App from './App'
 import Home from './layouts/home/Home'
+import Validators from './layouts/validators/Validators'
 
 // Redux Store
 import store from './store'
@@ -21,6 +22,7 @@ ReactDOM.render((
       <Router history={history}>
         <Route path="/" component={App}>
           <IndexRoute component={Home} />
+          <Route path="validators" component={Validators} />
         </Route>
       </Router>
     </Provider>

@@ -3,6 +3,7 @@ const initialState = {
   endpoint: "",
   skaleId: "",
   balance: "",
+  balanceSKL: "",
 }
 
 const web3Reducer = (state = initialState, action) => {
@@ -27,7 +28,8 @@ const web3Reducer = (state = initialState, action) => {
   if (action.type === 'UPDATE_BALANCE')
   {
     return Object.assign({}, state, {
-      balance: action.payload,
+      balance: action.payload.balance,
+      balanceSKL: action.payload.balanceSKL,
     })
   }
 

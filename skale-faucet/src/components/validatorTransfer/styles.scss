@@ -1,0 +1,111 @@
+.money-transfer {
+  margin: 70px 0 0 0;
+  .transactionData, .blockData {
+    font-size: 13px;
+  }
+  #dataBlock .list-group, #txBlock .list-group {
+    height: 350px;
+    overflow: hidden;
+  }
+  .data-list {
+    overflow: auto;
+  }
+  .searchBlock, .searchTransaction {
+    border-top: 1px solid #29ABE1;
+    height: 350px;
+    font-size: 14px;
+    padding: 10px 0px 0px 20px;
+    z-index: 100;
+  }
+  .close {
+    margin: 0px 20px 0 0;
+    padding: 0px;
+    border: 1px solid #d9e021;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    color: #d9e021 !important;
+    opacity: 1;
+    span {
+      font-size: 30px;
+    }
+  }
+  input {
+    background-color: transparent;
+    border: 0px;
+    border-bottom: 1px solid #d9e02187;
+    color: #ffffff;
+    width: 430px;
+  }
+  .search-container *,
+  .search-container *:after,
+  .search-container *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  /* search bar focus */
+  .search-container *:focus {
+    color: #fffff;
+    outline: 0;
+  }
+
+  /* search bar container */
+  .search-container {
+    display: table;
+    position: relative;
+    width: 31px;
+  }
+
+  /* search icon button */
+  .search-icon-btn {
+    background-color: #1b1b1b;
+    border: 1px solid #1b1b1b;
+    display: table-cell;
+    height: 30px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    width: 30px;
+    z-index: 2;
+  }
+
+  /* search bar input container */
+  .search-input {
+    position: absolute;
+    right: 1px;
+    z-index: 1;
+  }
+
+  /* search bar input */
+  .search-input input.search-bar {
+    border-bottom: 1px solid #29ABE1;
+    height: 30px;
+    padding: 0px;
+    width: 30px;
+  }
+  .search-input input.search-bar:focus {
+    padding-right: 5px;
+    padding-left: 10px;
+    width: 300px;
+  }
+
+  /* transition effect */
+  .search-input input.search-bar,
+  .search-icon-btn {
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+  }
+
+  /* hover on search bar container */
+  .search-container:hover > .search-input input.search-bar {
+    padding-right: 5px;
+    padding-left: 10px;
+    width: 300px; 
+  }
+}

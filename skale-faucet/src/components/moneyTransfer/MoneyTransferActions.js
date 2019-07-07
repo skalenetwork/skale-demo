@@ -61,7 +61,7 @@ async function getBalance(dispatch) {
   const web3 = new Web3(endpoint);
   if(typeof web3 !== 'undefined' && account !== ""){
     const balance = await web3.eth.getBalance(account);
-    dispatch(updateBalance(web3.utils.fromWei(balance, 'ether')));
+    dispatch(updateBalance({balance: web3.utils.fromWei(balance, 'ether')}));
   }
 }
 

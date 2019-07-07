@@ -5,4 +5,10 @@
 *package-lock.json
 *server/
 *skale-portis/
+*file-storage/
+*make-a-cake/
+*money-transfer/
 *skale-bitski/
+*rock-paper-scissors/
+*.env
+
