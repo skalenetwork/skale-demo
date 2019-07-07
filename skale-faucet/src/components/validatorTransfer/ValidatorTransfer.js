@@ -20,7 +20,9 @@ class ValidatorTransfer extends Component {
   }
 
   handleSubmit(event) {
-    this.props.onSendETH(event);
+    if(this.props.account !== "" && this.props.account.length > 39){
+      this.props.onSendETH(event);
+    }
   }
 
   render() {
