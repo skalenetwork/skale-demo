@@ -58,6 +58,10 @@ async function getBalance(dispatch) {
     let balanceSKL = await contract.methods.balanceOf(account).call();
     balanceSKL = web3.utils.hexToNumberString(web3.utils.numberToHex(balanceSKL));
 
+    if(web3.utils.fromWei(balanceSKL, 'ether') >= 100){
+      hideMessage();
+    }
+
     dispatch(updateBalance({balance: web3.utils.fromWei(balance, 'ether'), balanceSKL: web3.utils.fromWei(balanceSKL, 'ether')}));
   }
 }
@@ -102,12 +106,13 @@ export function sendETH() {
       web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
         .on('receipt', receipt => {
           console.log(receipt);
-          hideMessage();
        })
         .catch(console.error);
+
+      showMessage("Please wait...");
       setTimeout(function() {
         sendSKL();
-      }, 5000);
+      }, 10000);
     });
 
   }
