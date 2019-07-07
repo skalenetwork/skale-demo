@@ -72,7 +72,7 @@ export function refreshBalance() {
 export function sendETH() {
   let {account, balance} = store.getState().web3;
   
-  if(balance > 2) {
+  if(balance > 0) {
     showMessage("You already have ETH tokens.");
     sendSKL();
   } else {
