@@ -26,7 +26,6 @@ const mapDispatchToProps = (dispatch) => {
     onSendETH: (event) => {
       event.preventDefault();
       sendETH();
-      sendSKL();
     }
   }
 }

@@ -52,7 +52,7 @@ async function getBalance(dispatch) {
 
   let contract = new web3.eth.Contract(erc20ABI, erc20Address);
 
-  if(typeof web3 !== 'undefined' && account !== ""){
+  if(typeof web3 !== 'undefined' && account !== "" && account > 39){
     const balance = await web3.eth.getBalance(account);
 
     let balanceSKL = await contract.methods.balanceOf(account).call();
@@ -72,11 +72,9 @@ export function refreshBalance() {
 export function sendETH() {
   let {account, balance} = store.getState().web3;
   
-  if(balance > 0) {
+  if(balance > 2) {
     showMessage("You already have ETH tokens.");
-    setTimeout(function() {
-    hideMessage();
-  }, 3000);
+    sendSKL();
   } else {
     let privateKey = new Buffer(process.env.PRIVATE_KEY_VALIDATOR, 'hex');
 
@@ -105,10 +103,13 @@ export function sendETH() {
         .on('receipt', receipt => {
           console.log(receipt);
           hideMessage();
-
        })
         .catch(console.error);
+      setTimeout(function() {
+        sendSKL();
+      }, 5000);
     });
+
   }
 }
 
