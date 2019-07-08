@@ -26,7 +26,7 @@ class MoneyTransfer extends Component {
 
   handleSubmit(event) {
     let endpointVerify = /((https?)|(wss?):\/\/.*):(\d*)\/?/;
-    if(endpointVerify.test(this.props.endpoint && this.props.account !== "" && this.props.account.length > 39)){
+    if(endpointVerify.test(this.props.endpoint)){
       this.props.onSendETH(event);
     } else {
       event.preventDefault();
