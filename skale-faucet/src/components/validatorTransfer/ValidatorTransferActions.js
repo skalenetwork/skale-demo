@@ -80,41 +80,18 @@ export function sendETH() {
     showMessage("You already have ETH tokens.");
     sendSKL();
   } else {
-    let privateKey = new Buffer(process.env.PRIVATE_KEY_VALIDATOR, 'hex');
-
-    const web3 = new Web3(process.env.PRIVATE_MAINNET);
-    
     showMessage("Transfering ETH.");
 
-    web3.eth.getTransactionCount(process.env.ACCOUNT_VALIDATOR).then(nonce => {
-      
-      const rawTx = {
-        from: process.env.ACCOUNT_VALIDATOR,
-        nonce: "0x" + nonce.toString(16),
-        to: account,
-        gasPrice: 0,
-        gas: 8000000,
-        value: web3.utils.toHex(web3.utils.toWei("0.2", 'ether'))
+    fetch(
+      "http://167.71.154.134/faucet/validator/eth/" +
+        account
+    ).then(response => {
+        showMessage("Please wait...")
+        setTimeout(function() {
+          sendSKL();
+        }, 10000);
       }
-
-      const tx = new Tx(rawTx);
-      tx.sign(privateKey);
-
-      const serializedTx = tx.serialize();
-
-      //send signed transaction
-      web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
-        .on('receipt', receipt => {
-          console.log(receipt);
-       })
-        .catch(console.error);
-
-      showMessage("Please wait...");
-      setTimeout(function() {
-        sendSKL();
-      }, 10000);
-    });
-
+    );
   }
 }
 
@@ -127,44 +104,18 @@ export function sendSKL() {
     hideMessage();
   }, 3000);
   } else {
-    let privateKey = new Buffer(process.env.PRIVATE_KEY_VALIDATOR, 'hex');
+    showMessage("Transfering SKL Tokens.");
 
-    const web3 = new Web3(process.env.PRIVATE_MAINNET);
-
-    const amount = web3.utils.toHex(web3.utils.toWei("100", 'ether'));
-    const erc20ABI = privateTestnetJson.skale_token_abi;
-    const erc20Address = privateTestnetJson.skale_token_address;
-
-    let contract = new web3.eth.Contract(erc20ABI, erc20Address);
-
-    showMessage("Transfering Tokens.");
-
-    web3.eth.getTransactionCount(process.env.ACCOUNT_VALIDATOR).then(nonce => {
-      
-      const rawTx = {
-        from: process.env.ACCOUNT_VALIDATOR,
-        nonce: "0x" + nonce.toString(16),
-        gasPrice: 0,
-        gas: 8000000,
-        to: erc20Address,
-        value: "0x0",
-        data: contract.methods.transfer(account, amount).encodeABI(),
-      };
-
-      const tx = new Tx(rawTx);
-      tx.sign(privateKey);
-
-      const serializedTx = tx.serialize();
-
-      //send signed transaction
-      web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
-        .on('receipt', receipt => {
-          console.log(receipt);
-          hideMessage();
-
-       })
-        .catch(console.error);
-    });
+    fetch(
+      "http://167.71.154.134/faucet/validator/skl/" +
+        account
+    ).then(response => {
+        showMessage("Please wait...");
+        setTimeout(function() {
+          sendSKL();
+        }, 10000);
+      }
+    );
   }
 }
 
