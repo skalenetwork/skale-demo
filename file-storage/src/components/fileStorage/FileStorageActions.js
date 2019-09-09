@@ -43,8 +43,8 @@ export async function upload(fileName, fileData){
 }
 
 export async function getFiles(){
-  let {account, filestorage} = store.getState().web3;
-  let files = await filestorage.getFileInfoListByAddress(account);
+  let {account, filestorage, web3Instance} = store.getState().web3;
+  let files = await filestorage.listDirectory(web3Instance.utils.stripHexPrefix(account));
   store.dispatch(updateFiles(files));
 }
 
