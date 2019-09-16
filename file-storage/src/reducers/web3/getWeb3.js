@@ -15,10 +15,10 @@ export let getWeb3 = new Promise(function(resolve, reject) {
   let web3 = new Web3(process.env.SKALE_CHAIN);
 
   let filestorage = new FilestorageClient(process.env.SKALE_CHAIN, true);
-    
+
   resolve(store.dispatch(web3Initialized({
-    web3: web3, 
-    account: process.env.ACCOUNT, 
+    web3: web3,
+    account: '0x'+web3.utils.stripHexPrefix(process.env.ACCOUNT),
     filestorage: filestorage
   })));
 })
