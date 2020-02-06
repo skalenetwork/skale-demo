@@ -124,7 +124,7 @@ class Explorer extends Component {
                 Gas Used:</span></strong> {block.gasUsed}
               </div>
               <div><strong><span className="border-bottom border-dark">
-                Trsndsctions:</span></strong>
+                Transactions:</span></strong>
               </div>
               <div className="accordion" id="dataTxBlock">
                 {block.transactionData ? block.transactionData.map((dataTx, index) => {
@@ -200,7 +200,7 @@ class Explorer extends Component {
                             Gas Used:</span></strong> {data.gasUsed}
                           </div>
                           <div><strong><span className="border-bottom border-dark">
-                            Trsndsctions:</span></strong>
+                            Transactions:</span></strong>
                           </div>
                           <div className="accordion" id="dataTxBlock">
                             {data.transactionData.map((dataTx, index) => {
