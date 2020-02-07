@@ -19,4 +19,4 @@ app.use(bodyParser.json());
 
 app.use('/faucet', faucetRouter);
 
-app.listen(3333, () => console.log("Listening on port 3333!"));
+app.listen(6666, () => console.log("Listening on port 6666!"));
