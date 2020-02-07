@@ -1,0 +1,21 @@
+{
+  "name": "SKALE-SOLUTIONS-ENGINEERING-API",
+  "version": "1.0.0",
+  "description": "API used by the Solutions Engineering team",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christine Perry",
+  "homepage": "https://skalelabs.com",
+  "devDependencies": {
+    "body-parser": "^1.14.2",
+    "dotenv": "^2.0.0",
+    "ethereumjs-tx": "^1.3.7",
+    "express": "^4.13.4",
+    "gulp": "^3.9.0",
+    "morgan": "^1.6.1",
+    "web3": "^1.0.0-beta.55"
+  }
+}
