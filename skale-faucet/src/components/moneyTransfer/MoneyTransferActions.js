@@ -78,7 +78,7 @@ export function sendETH() {
   showMessage("Transfering ETH.");
 
   fetch(
-    "http://se-api.skale.network/faucet/sip/" +
+    "https://se-api.skale.network/faucet/sip/" +
       account +
       "/?" +
       "endpoint=" +

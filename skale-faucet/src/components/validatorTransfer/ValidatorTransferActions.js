@@ -83,7 +83,7 @@ export function sendETH() {
     showMessage("Transfering ETH.");
 
     fetch(
-      "http://se-api.skale.network/faucet/validator/eth/" +
+      "https://se-api.skale.network/faucet/validator/eth/" +
         account
     ).then(response => {
         showMessage("Please wait...")
@@ -107,7 +107,7 @@ export function sendSKL() {
     showMessage("Transfering SKL Tokens.");
 
     fetch(
-      "http://se-api.skale.network/faucet/validator/skl/" +
+      "https://se-api.skale.network/faucet/validator/skl/" +
         account
     ).then(response => {
         showMessage("Please wait...");
