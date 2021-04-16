@@ -1,0 +1,25 @@
+{
+  "name": "com.unity.uiwidgets",
+  "displayName": "UIWidgets",
+  "version": "1.5.4-preview.8",
+  "unity": "2018.3",
+  "description": "UIWidgets allows you to build beautiful cross-platform apps through Unity.\n\nThe UIWidgets installed from here has removed Resources and Plugins folder. You may be prompted to import the required resources. The resources are also available at https://github.com/UIWidgets/Resources.\n\nIf you need to build for Android, iOS or WebGL, you need to download the plugins manually from https://github.com/UIWidgets/Plugins.",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.cds.internal.unity3d.com:unity/com.unity.uiwidgets.git",
+    "revision": "c26d9f2cfd227ab4120b8ccaf104148ef61c06b7"
+  },
+  "samples": [
+    {
+      "displayName": "Redux Sample",
+      "description": "Sample usage of Redux & UIWidgets",
+      "path": "Samples~/ReduxSample"
+    },
+    {
+      "displayName": "UIWidgetSample",
+      "description": "Sample usage of UI Wideget",
+      "path": "Samples~/UIWidgetsSample"
+    }
+  ]
+}

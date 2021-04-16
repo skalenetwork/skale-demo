@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f107dc6d4c984c45bdafd3bb15f98f0, type: 3}
+  m_Name: Walkthrough5
+  m_EditorClassIdentifier: 
+  m_WindowTitle: Walkthrough
+  m_TutorialTitle: Build, Share, and Play
+  m_LessonId: 48146
+  m_Version: 0
+  m_Scene: {fileID: 102900000, guid: f8c7069e6d9b2124b861144ca83d31e8, type: 3}
+  m_DefaultSceneCameraSettings:
+    m_CameraMode: 0
+    m_FocusMode: 0
+    m_Orthographic: 0
+    m_Size: 0
+    m_Pivot: {x: 0, y: 0, z: 0}
+    m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+    m_FrameObject:
+      m_SceneGuid: 
+      m_GameObjectGuid: 
+      m_SerializedComponentType:
+        m_TypeName: 
+      m_ComponentIndex: 0
+      m_AssetObject: {fileID: 0}
+      m_Prefab: {fileID: 0}
+    m_Enabled: 0
+  m_ExitBehavior: 1
+  m_SkipTutorialBehavior: 0
+  m_AssetSelectedOnExit: {fileID: 11400000, guid: 08f5116c6f71aa548a00fbd1f56fa92e,
+    type: 2}
+  m_WelcomePage: {fileID: 0}
+  m_CompletedPage: {fileID: 0}
+  IsWelcomingPageShowing: 1
+  IsCompletedPageShowing: 0
+  m_Pages:
+    m_Items:
+    - {fileID: 11400000, guid: 8c0fe4cc1a06b4330b9280a5e61560b7, type: 2}
+    - {fileID: 11400000, guid: 6b9c840879aa4814c862280c389a83a1, type: 2}
+    - {fileID: 11400000, guid: 957cdb143db889f4c8bf8ff83e3cb60e, type: 2}
+    - {fileID: 11400000, guid: 64c97b8d5647467429239de98178e1a8, type: 2}
+    - {fileID: 11400000, guid: e54090827562a7e4fa705a704dc2d063, type: 2}
+    - {fileID: 11400000, guid: 07aa0cac4743c954193724649c343eec, type: 2}
+    - {fileID: 11400000, guid: 994d9c3eb7a9a2c4b931b0aa81f35a11, type: 2}
+  m_WindowLayout: {fileID: 102900000, guid: cde0ced735db64fadb69328562c039e2, type: 3}

@@ -1,0 +1,2 @@
+namespace Unity.UIWidgets.foundation {
+}

@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89305aa391d1c5141bbe1628d930a2c5, type: 3}
+  m_Name: Tutorials
+  m_EditorClassIdentifier: 
+  headerBackground: {fileID: 2800000, guid: 1c7aa536c503744ffafe54d893a5816b, type: 3}
+  title: Your First 6 Steps to Creating a Game
+  projectName: Karting
+  description: Start building your first game now. Have fun clicking through these
+    6 helpful steps and you will have the foundation to modifying your first game
+    in less than 30 minutes.
+  projectLayout: {fileID: 0}
+  sections:
+  - orderInView: 0
+    heading: Playtest
+    text: Make a simple change and playtest your game.
+    linkText: 
+    url: 
+    buttonText: Let's Go
+    tutorial: {fileID: 11400000, guid: 92d21b44a68004daebe1f6c4e03b487a, type: 2}
+    image: {fileID: 2800000, guid: dea29fde4b88b4c0e9d8370e83020c06, type: 3}
+    completedImage: {fileID: 2800000, guid: 11a8e34ea358c4b8885176f936317cc6, type: 3}
+  - orderInView: 2
+    heading: Editor UI
+    text: Master the main controls, views and windows.
+    linkText: 
+    url: 
+    buttonText: Show Me
+    tutorial: {fileID: 11400000, guid: ef019b20e49b14cfca4e98ecf5fd345d, type: 2}
+    image: {fileID: 2800000, guid: ad9f1234d3a9046e99a56e1aa0f6ff42, type: 3}
+    completedImage: {fileID: 2800000, guid: 8a456994a80234fd2863df4d7e29e6b0, type: 3}
+  - orderInView: 4
+    heading: Edit Colors
+    text: Learn how to  change color of the Kart.
+    linkText: 
+    url: 
+    buttonText: Let's Color
+    tutorial: {fileID: 11400000, guid: 83255933b1f9a13428ca582620d979c8, type: 2}
+    image: {fileID: 2800000, guid: 02e1aaacc31014d1f8d4ed2397a5b4c1, type: 3}
+    completedImage: {fileID: 2800000, guid: 6390f201c83c6463198f231e70f96148, type: 3}
+  - orderInView: 6
+    heading: Add Building
+    text: Learn how to add Prefab objects to game.
+    linkText: 
+    url: 
+    buttonText: Let's Add
+    tutorial: {fileID: 11400000, guid: 351b553575cb34b12945f5996095329d, type: 2}
+    image: {fileID: 2800000, guid: eb963beb4801244aeb9441dfa39555c1, type: 3}
+    completedImage: {fileID: 2800000, guid: 780f3b3e549e6432b8439c5b6d8542cf, type: 3}
+  - orderInView: 8
+    heading: Build and Share
+    text: Create a build of your game and share it to the web.
+    linkText: 
+    url: 
+    buttonText: Let's Build
+    tutorial: {fileID: 11400000, guid: 5a1808b6ca2b3422381c2337d4a493b3, type: 2}
+    image: {fileID: 2800000, guid: a63863a2af95b4774bf1392c24952242, type: 3}
+    completedImage: {fileID: 2800000, guid: 386ad4dcd15bf45459f96ff08a55be45, type: 3}
+  - orderInView: 10
+    heading: Modding Tutorials
+    text: Add rainbows, witches hats, flames to your game, and more.
+    linkText: asd
+    url: https://learn.unity.com/project/karting-template?courseId=5c59cf22edbc2a001f59aa5d
+    buttonText: asdasd
+    tutorial: {fileID: 0}
+    image: {fileID: 2800000, guid: c418c9a48b9984a8f9e89a7b0f6bdf9e, type: 3}
+    completedImage: {fileID: 2800000, guid: c418c9a48b9984a8f9e89a7b0f6bdf9e, type: 3}
+  - orderInView: 12
+    heading: Karting User Group
+    text: Join other Karting Creators in community group.
+    linkText: asd
+    url: https://connect.unity.com/g/karting-creators
+    buttonText: asdasd
+    tutorial: {fileID: 0}
+    image: {fileID: 2800000, guid: c418c9a48b9984a8f9e89a7b0f6bdf9e, type: 3}
+    completedImage: {fileID: 2800000, guid: c418c9a48b9984a8f9e89a7b0f6bdf9e, type: 3}

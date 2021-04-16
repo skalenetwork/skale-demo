@@ -1,0 +1,38 @@
+﻿<Properties StartupConfiguration="{CF9D1C0B-663D-6AFA-F4D2-BA8BD6DC9458}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Karting/Scripts/Track/TrackManager.cs">
+    <Files>
+      <File FileName="Assets/Karting/Scripts/Track/TimeDisplay.cs" Line="4" Column="1" IsPinned="True" />
+      <File FileName="Assets/Karting/Scripts/Track/TrackManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Mod Assets/ModResources/Scripts/Kart/Jiggler.cs" Line="35" Column="10" />
+      <File FileName="Assets/Karting/Scripts/Track/Racer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Karting/Scripts/Track/KartRepositionTrigger.cs" Line="1" Column="1" />
+      <File FileName="Assets/Karting/Scripts/Track/KartRepositioner.cs" Line="1" Column="1" />
+      <File FileName="Assets/Karting/Scripts/Track/IRacer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Karting/Scripts/Track/InstantKartRepositioner.cs" Line="1" Column="1" />
+      <File FileName="Assets/Karting/Scripts/Track/Checkpoint.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="d138408d46cbb498fa913948807ec4d2" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Karting" expanded="True">
+                <Node name="Scripts" expanded="True">
+                  <Node name="Track" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Nethereum" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="874c0244-f398-4cfb-b5c3-53b3ab651136" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

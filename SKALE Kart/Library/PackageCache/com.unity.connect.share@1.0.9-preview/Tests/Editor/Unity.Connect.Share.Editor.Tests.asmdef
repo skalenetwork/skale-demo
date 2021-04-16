@@ -1,0 +1,12 @@
+{
+    "name": "Unity.Connect.Share.Editor.Tests",
+    "references": [
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
