@@ -38,7 +38,9 @@ export async function upload(fileName, fileData){
   let {account, filestorage, web3Instance} = store.getState().web3;
   let privateKey = '0x' + web3Instance.utils.stripHexPrefix(process.env.PRIVATE_KEY);
   showMessage("Uploading your image.");
-  await filestorage.uploadFile(account, fileName, fileData, privateKey);
+  let path = await filestorage.uploadFile(account, fileName, fileData, privateKey);
+  console.log('STORAGE PATH: ');
+  console.log('SCHAIN_NAME/' + path);
   hideMessage();
 }
 
