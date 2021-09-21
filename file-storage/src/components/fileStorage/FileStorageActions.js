@@ -38,9 +38,12 @@ export async function upload(fileName, fileData){
   let {account, filestorage, web3Instance} = store.getState().web3;
   let privateKey = '0x' + web3Instance.utils.stripHexPrefix(process.env.PRIVATE_KEY);
   showMessage("Uploading your image.");
+  await filestorage.reserveSpace(process.env.ACCOUNT, process.env.ACCOUNT, 10**7, process.env.PRIVATE_KEY)
   let path = await filestorage.uploadFile(account, fileName, fileData, privateKey);
   console.log('STORAGE PATH: ');
-  console.log('SCHAIN_NAME/' + path);
+  let regExp = /^[^/]+/;
+  let urlPath = path.replace(regExp, function(v) { return v.toLowerCase(); })
+  console.log('SCHAIN_NAME/' + urlPath);
   hideMessage();
 }
 
