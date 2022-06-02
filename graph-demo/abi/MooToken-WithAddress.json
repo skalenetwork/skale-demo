@@ -1,0 +1,797 @@
+{
+    "erc721_address": "0x0F7E4C4107829CF2F2E3137E834BE80ba6DF8545",
+    "erc721_abi": [
+        {
+            "type": "constructor",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "minter"
+                },
+                {
+                    "type": "string",
+                    "name": "baseURI"
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "Approval",
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "owner",
+                    "indexed": true
+                },
+                {
+                    "type": "address",
+                    "name": "approved",
+                    "indexed": true
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId",
+                    "indexed": true
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "ApprovalForAll",
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "owner",
+                    "indexed": true
+                },
+                {
+                    "type": "address",
+                    "name": "operator",
+                    "indexed": true
+                },
+                {
+                    "type": "bool",
+                    "name": "approved",
+                    "indexed": false
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "OwnershipTransferred",
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "previousOwner",
+                    "indexed": true
+                },
+                {
+                    "type": "address",
+                    "name": "newOwner",
+                    "indexed": true
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "RoleAdminChanged",
+            "inputs": [
+                {
+                    "type": "bytes32",
+                    "name": "role",
+                    "indexed": true
+                },
+                {
+                    "type": "bytes32",
+                    "name": "previousAdminRole",
+                    "indexed": true
+                },
+                {
+                    "type": "bytes32",
+                    "name": "newAdminRole",
+                    "indexed": true
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "RoleGranted",
+            "inputs": [
+                {
+                    "type": "bytes32",
+                    "name": "role",
+                    "indexed": true
+                },
+                {
+                    "type": "address",
+                    "name": "account",
+                    "indexed": true
+                },
+                {
+                    "type": "address",
+                    "name": "sender",
+                    "indexed": true
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "RoleRevoked",
+            "inputs": [
+                {
+                    "type": "bytes32",
+                    "name": "role",
+                    "indexed": true
+                },
+                {
+                    "type": "address",
+                    "name": "account",
+                    "indexed": true
+                },
+                {
+                    "type": "address",
+                    "name": "sender",
+                    "indexed": true
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "TokenMinted",
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "from",
+                    "indexed": false
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId",
+                    "indexed": false
+                },
+                {
+                    "type": "uint256",
+                    "name": "userBalance",
+                    "indexed": false
+                },
+                {
+                    "type": "string",
+                    "name": "tokenURI",
+                    "indexed": false
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "TokenStaked",
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "from",
+                    "indexed": false
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId",
+                    "indexed": false
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "TokenUnStaked",
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "from",
+                    "indexed": false
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId",
+                    "indexed": false
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "TokenUsed",
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "from",
+                    "indexed": false
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId",
+                    "indexed": false
+                },
+                {
+                    "type": "uint256",
+                    "name": "usedAmount",
+                    "indexed": false
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "Transfer",
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "from",
+                    "indexed": true
+                },
+                {
+                    "type": "address",
+                    "name": "to",
+                    "indexed": true
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId",
+                    "indexed": true
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "DEFAULT_ADMIN_ROLE",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bytes32",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "MINTER_ROLE",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bytes32",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "approve",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "balanceOf",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "owner"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "uint256",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getApproved",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "address",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getBalance",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "member"
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "uint256",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getCurrentTokenId",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "uint256",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getRoleAdmin",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "bytes32",
+                    "name": "role"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "bytes32",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getStake",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "member"
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "bool",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getUsed",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "member"
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "uint256",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "grantRole",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "bytes32",
+                    "name": "role"
+                },
+                {
+                    "type": "address",
+                    "name": "account"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "hasRole",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "bytes32",
+                    "name": "role"
+                },
+                {
+                    "type": "address",
+                    "name": "account"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "bool",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "isApprovedForAll",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "owner"
+                },
+                {
+                    "type": "address",
+                    "name": "operator"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "bool",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "mint",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "owner"
+                },
+                {
+                    "type": "uint256",
+                    "name": "userBalance"
+                },
+                {
+                    "type": "string",
+                    "name": "metadataURI"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "name",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "string",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "owner",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "address",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "ownerOf",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "address",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "renounceOwnership",
+            "constant": false,
+            "payable": false,
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "renounceRole",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "bytes32",
+                    "name": "role"
+                },
+                {
+                    "type": "address",
+                    "name": "account"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "revokeRole",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "bytes32",
+                    "name": "role"
+                },
+                {
+                    "type": "address",
+                    "name": "account"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "safeTransferFrom",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "from"
+                },
+                {
+                    "type": "address",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "safeTransferFrom",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "from"
+                },
+                {
+                    "type": "address",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                },
+                {
+                    "type": "bytes",
+                    "name": "_data"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "setApprovalForAll",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "operator"
+                },
+                {
+                    "type": "bool",
+                    "name": "approved"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "stake",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "supportsInterface",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "bytes4",
+                    "name": "interfaceId"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "bool",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "symbol",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "string",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "tokenURI",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "string",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "transferFrom",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "from"
+                },
+                {
+                    "type": "address",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "transferOwnership",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "newOwner"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "unStake",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "use",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
+            "outputs": []
+        }
+    ]
+}

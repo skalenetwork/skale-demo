@@ -1,0 +1,30 @@
+specVersion: 0.0.2
+description: MooToken for SKALE
+repository: https://github.com/skalenetwork/se-internal/tree/graph-demo
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: MooToken
+    network: skale
+    source:
+      address: '0x0F7E4C4107829CF2F2E3137E834BE80ba6DF8545'
+      abi: MooToken
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - MooToken
+      abis:
+        - name: MooToken
+          file:  ./abi/MooToken.json
+      eventHandlers:
+        - event: TokenMinted(address,uint256,uint256,string)
+          handler: handleNewMooToken
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransferMooToken
+        - event: TokenUsed(address,uint256,uint256)
+          handler: handleUseMooToken
+      file: ./src/mapping.ts

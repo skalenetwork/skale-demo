@@ -1,0 +1,32 @@
+{
+  "description": "Moo token is very important for the Mad Cow community, Be like Mad Cow and get Moo NFTs, stake them for Moo murchandise or use them for Moo parties.\n\n[mootoken.xyz](https://www.mootoken.xyz/)",
+  "image": "<ImageURL_Here>",
+  "name": "Moo Token",
+  "attributes": [
+    {
+      "trait_type": "Hair",
+      "value": "Long"
+    },
+    {
+      "trait_type": "accessory",
+      "value": "glasses"
+    },
+    {
+      "trait_type": "clothing",
+      "value": "Taco"
+    },
+    {
+      "trait_type": "vehicle",
+      "value": "bike"
+    },
+    {
+      "trait_type": "Body",
+      "value": "Builder Hands"
+    },
+    {
+      "trait_type": "nose",
+      "value": "Builder Hands"
+    }
+  ],
+  "external_url": "https://www.mootoken.xyz/"
+}

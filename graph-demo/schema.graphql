@@ -1,0 +1,8 @@
+type MyMooToken @entity {
+  id: ID!
+  from: Bytes!
+  type: Int!
+  tokenURI: String
+  used: BigInt
+}
+
