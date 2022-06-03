@@ -1,5 +1,5 @@
 require('dotenv').config()
-const Filestorage = require('@skalenetwork/filestorage.js');
+const FileStorage = require('@skalenetwork/filestorage.js');
 const Web3 = require('web3');
 const fs = require("fs");
 const path = require("path");
@@ -8,7 +8,7 @@ const addressMinter = process.env.REACT_APP_ACCOUNT;
 const pk = process.env.REACT_APP_PRIVATE_KEY;
 const web3Provider = new Web3.providers.HttpProvider(endpoint);
 
-let fileStorageMinter = new Filestorage(web3Provider, true);
+let fileStorageMinter = new FileStorage(web3Provider, true);
 let web3Minter = new Web3(web3Provider);
 
 

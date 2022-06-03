@@ -19,8 +19,8 @@ let generatedImageDirectory = fsEndpoint + "/" + uploadFile.stripHexPrefix(addre
     await uploadFile.uploadFile(skaleFileDirectory, localFileDirectory, svgNewFileName);
     console.log(generatedImageDirectory + svgNewFileName);
 
-    console.log("--------Uploading new nft metadata to FileStorage--------");
-    let tokenId = parseInt(await mooToken.getCurrentTokenId()) + 1;
+    console.log("--------Uploading new nft metadata to FileStorage--------", await mooToken.getCurrentTokenId());
+    let tokenId = await mooToken.getCurrentTokenId() + 1;
     const uploadedMDFileName = tokenId + ".json";
 
     let jsonWithImageURL = await nftModification.changeImageURL(nftMetadataFileName, generatedImageDirectory + svgNewFileName);
@@ -29,11 +29,12 @@ let generatedImageDirectory = fsEndpoint + "/" + uploadFile.stripHexPrefix(addre
 
     console.log("--------Mint an NFT with tokenId-------- ");
     await mooToken.mint(addressMinter, skaleFileDirectory + "/"+ uploadedMDFileName)
-    console.log("--------Stake an NFT with tokenId-------- ");
-    await mooToken.stake(addressMinter,parseInt(await mooToken.getCurrentTokenId()));
-    console.log("--------UnStake an NFT with tokenId-------- ");
-    // await mooToken.unStake(addressMinter,parseInt(await mooToken.getCurrentTokenId()));
+
+    console.log("--------Stake an NFT with tokenId-------- ",tokenId);
+    await mooToken.stake(addressMinter,tokenId);
+    console.log("--------UnStake an NFT with tokenId-------- ",tokenId);
+    await mooToken.unStake(addressMinter,tokenId);
     console.log("--------Use an NFT with tokenId-------- ");
-    await mooToken.use(addressMinter, parseInt(await mooToken.getCurrentTokenId()));
+    await mooToken.use(addressMinter,tokenId);
 })();
 

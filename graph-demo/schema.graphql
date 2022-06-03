@@ -7,6 +7,14 @@ type MyMooToken @entity {
   balanceNow: BigInt!
   isStaked: Boolean
   stakeCount: Int
-  stakeTimeStamp:BigInt!
+  stakeTimeStamp:BigInt!,
+  tokOwner: Owner!
 }
 
+
+type Owner @entity {
+  id: ID!
+  from: Bytes!
+  tokens: [MyMooToken!]! @derivedFrom(field: "tokOwner")
+  totalCountTokens: BigInt!
+}

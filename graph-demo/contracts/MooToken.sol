@@ -20,15 +20,15 @@ contract MooToken is ERC721URIStorage, AccessControl, Ownable{
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    event TokenMinted(address from, uint256 tokenId, uint256 userBalance, string tokenURI);
-    event TokenUsed(address from, uint256 tokenId,uint256 usedAmount);
-    event TokenStaked(address from, uint256 tokenId);
-    event TokenUnStaked(address from, uint256 tokenId);
+    event TokenMinted(address from, uint tokenId, uint userBalance, string tokenURI);
+    event TokenUsed(address from, uint tokenId,uint usedAmount);
+    event TokenStaked(address from, uint tokenId);
+    event TokenUnStaked(address from, uint tokenId);
 
 
-    mapping(uint256 => mapping(address => uint256)) private _userBalance;
-    mapping(uint256 => mapping(address => uint256)) private _used;
-    mapping(uint256 => mapping(address => bool)) private _staked;
+    mapping(uint => mapping(address => uint)) private _userBalance;
+    mapping(uint => mapping(address => uint)) private _used;
+    mapping(uint => mapping(address => bool)) private _staked;
 
 
     constructor(address minter, string memory baseURI) ERC721("MooToken", "Moo") {
@@ -42,14 +42,14 @@ contract MooToken is ERC721URIStorage, AccessControl, Ownable{
 
     function mint(
         address owner,
-        uint256 userBalance,
+        uint userBalance,
         string memory metadataURI
     )
     external
     {
         require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
         _tokenIds.increment();
-        uint256 id = _tokenIds.current();
+        uint id = _tokenIds.current();
         _mint(owner, id);
         string memory fullPath = concat(concat(_baseTokenURI,toAsciiString(msg.sender)),metadataURI);
         _setTokenURI(id,fullPath);
@@ -58,7 +58,7 @@ contract MooToken is ERC721URIStorage, AccessControl, Ownable{
         emit TokenMinted(owner, id, userBalance, fullPath);
     }
 
-    function use(uint256 tokenId)  onlyOwner public{
+    function use(uint tokenId)  onlyOwner public{
         require(
             _userBalance[tokenId][msg.sender]  >= 1 + _used[tokenId][msg.sender],
             "MooToken: Not enough balance to use for Events"
@@ -68,28 +68,27 @@ contract MooToken is ERC721URIStorage, AccessControl, Ownable{
         emit TokenUsed(msg.sender, tokenId, 1);
     }
 
-    function stake(uint256 tokenId)  onlyOwner public{
+    function stake(uint tokenId)  onlyOwner public{
         _staked[tokenId][msg.sender]=true;
         emit TokenStaked(msg.sender, tokenId);
     }
 
-    function unStake(uint256 tokenId) onlyOwner public{
-        _staked[tokenId][msg.sender] = false;
+    function unStake(uint tokenId) onlyOwner public{
         emit TokenUnStaked(msg.sender, tokenId);
     }
 
-    function getCurrentTokenId() public view returns (uint256) {
+    function getCurrentTokenId() public view returns (uint) {
         return _tokenIds.current();
     }
 
-    function getStake(address member, uint256 tokenId) public view returns (bool) {
+    function getStake(address member, uint tokenId) public view returns (bool) {
         return _staked[tokenId][member];
     }
 
-    function getBalance(address member, uint256 tokenId) public view returns (uint256) {
+    function getBalance(address member, uint tokenId) public view returns (uint) {
         return _userBalance[tokenId][member] - _used[tokenId][member];
     }
-    function getUsed(address member, uint256 tokenId) public view returns (uint256) {
+    function getUsed(address member, uint tokenId) public view returns (uint) {
         return _used[tokenId][member];
     }
 

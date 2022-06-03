@@ -121,4 +121,72 @@ export class MyMooToken extends Entity {
   set stakeTimeStamp(value: BigInt) {
     this.set("stakeTimeStamp", Value.fromBigInt(value));
   }
+
+  get tokOwner(): string {
+    let value = this.get("tokOwner");
+    return value!.toString();
+  }
+
+  set tokOwner(value: string) {
+    this.set("tokOwner", Value.fromString(value));
+  }
+}
+
+export class Owner extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Owner entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Owner must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Owner", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Owner | null {
+    return changetype<Owner | null>(store.get("Owner", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get from(): Bytes {
+    let value = this.get("from");
+    return value!.toBytes();
+  }
+
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
+  }
+
+  get tokens(): Array<string> {
+    let value = this.get("tokens");
+    return value!.toStringArray();
+  }
+
+  set tokens(value: Array<string>) {
+    this.set("tokens", Value.fromStringArray(value));
+  }
+
+  get totalCountTokens(): BigInt {
+    let value = this.get("totalCountTokens");
+    return value!.toBigInt();
+  }
+
+  set totalCountTokens(value: BigInt) {
+    this.set("totalCountTokens", Value.fromBigInt(value));
+  }
 }

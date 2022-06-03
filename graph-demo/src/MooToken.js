@@ -31,7 +31,7 @@ async function unStake(owner, tokenId) {
     let mooToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi);
     if (!await addressHasSFUEL) await transfer_sFUEL(owner)
     const res = await mooToken.connect(signer).unStake(tokenId);
-    console.log("token is unStaked", await mooToken.connect(signer).getStake(owner, tokenId));
+    console.log("token is unstaked", await mooToken.connect(signer).getStake(owner, tokenId));
     console.log(res);
     return res;
 }
@@ -53,14 +53,13 @@ async function getUsed(owner, tokenId) {
     return parseInt(await mooToken.connect(signer).getUsed(owner,tokenId));
 }
 
-
 async function getCurrentTokenId() {
     let mooToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi);
-    return await mooToken.connect(signer).getCurrentTokenId();
+    return parseInt(await mooToken.connect(signer).getCurrentTokenId());
 }
 
 async function addressHasSFUEL(address) {
-    let addressBalance = await web3.eth.getBalance(address);
+    let addressBalance = await web3Provider.eth.getBalance(address);
     if (addressBalance < 0.1) {
         console.log("Address Balance is low")
         return false;
@@ -68,41 +67,22 @@ async function addressHasSFUEL(address) {
     return true;
 }
 
-async function getGraphQueryTokens(address)
-{
-    const tokensQuery = `
-     query {
-            myMooTokens (where: { from: "` + address + `", type:1})
-              {
-                  id,
-                  from,
-                  balance,
-                  tokenURI,
-                  used
-                }
-           }
-`
-    const client = createClient({
-        url: APIURL
-    });
-
-    return await client.query(tokensQuery).toPromise();
-}
-
  async function getGraphQueryTokensUsed(address)
 {
     const tokensQuery = `
      query {
-            myMooTokens (where: { from: "` + address + `", type:2})
-              {
-                  id,
-                  from,
-                  amount,
-                  type,
-                  tokenURI,
-                  used
-                }
-           }
+            myMooTokens (where: { from: "` + address + `"})
+                {
+                    id,
+                    owner,
+                    used,
+                    startingBalance,
+                    balanceNow,
+                    isStaked,
+                    stakeCount,
+                    stakeTimeStamp,
+                    tokenURI
+                  }
 `
     const client = createClient({
         url: APIURL
@@ -137,7 +117,6 @@ module.exports = {
     getBalance,
     getUsed,
     use,
-    getGraphQueryTokens,
     getGraphQueryTokensUsed,
     getCurrentTokenId
 };

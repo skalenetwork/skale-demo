@@ -8,7 +8,7 @@ dataSources:
     name: MooToken
     network: mainnet
     source:
-      address: '0xDC67a31621f2e0306998dE056c8E648A5b4560fF'
+      address: '0xE1E4905E8Faa4B2Cdd0A241B952C4615A42a176a'
       abi: MooToken
       startBlock: 690000
     mapping:

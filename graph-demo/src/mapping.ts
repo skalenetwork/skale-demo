@@ -1,5 +1,5 @@
 import {TokenMinted, Transfer, TokenUsed, TokenUnStaked, TokenStaked} from '../generated/MooToken/MooToken'
-import { MyMooToken } from '../generated/schema'
+import {MyMooToken, Owner} from '../generated/schema'
 import {  BigInt } from '@graphprotocol/graph-ts'
 
 let ONE = BigInt.fromI32(1)
@@ -8,6 +8,19 @@ let ZERO = BigInt.fromI32(0)
 export function handleNewMooToken(event: TokenMinted): void {
   let id = event.params.tokenId.toString();
   let tokenMinted = new MyMooToken(id)
+  let owner = Owner.load(event.params.from.toString())
+  if(owner!=null)
+  {
+    owner.totalCountTokens = owner.totalCountTokens.plus(ONE)
+  }
+  else
+  {
+    owner = new Owner(event.params.from.toString())
+    owner.totalCountTokens = ONE;
+    owner.from = event.params.from;
+  }
+  owner.save();
+  tokenMinted.tokOwner = owner.id;
   tokenMinted.owner = event.params.from
   tokenMinted.tokenURI = event.params.tokenURI
   tokenMinted.used = 0
@@ -24,8 +37,18 @@ export function handleTransferMooToken(event: Transfer): void {
   let tokenId = event.params.tokenId.toString();
   let tokenTransfered = MyMooToken.load(tokenId)
   if (tokenTransfered) {
-    tokenTransfered.owner = event.params.to
+    tokenTransfered.owner = event.params.to;
     tokenTransfered.save()
+    let owner = Owner.load(event.params.to.toString())
+    if (owner != null) {
+      owner.totalCountTokens = owner.totalCountTokens.minus(ONE)
+    } else {
+      owner = new Owner(event.params.to.toString())
+      owner.totalCountTokens = ONE;
+    }
+    owner.save();
+
+    tokenTransfered.tokOwner = owner.id;
   }
 }
 
