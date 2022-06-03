@@ -36,10 +36,10 @@
     "compile": "npx hardhat clean && npx hardhat compile",
     "deploy": "npx hardhat erc721 --network custom",
     "codegen": "graph codegen",
-    "create-local": "graph create MooToken --node http://127.0.0.1:8020",
-    "remove-local": "graph remove MooToken --node http://127.0.0.1:8020",
+    "create-local": "graph create MooToken --node https://downright-royal-saiph-graph-node.skale.network/",
+    "remove-local": "graph remove MooToken --node https://downright-royal-saiph-graph-node.skale.network/",
     "redeploy-local": "graph remove MooToken --node http://127.0.0.1:8020 && graph codegen && graph create MooToken --node http://127.0.0.1:8020 && graph deploy MooToken --ipfs http://localhost:5001 --node http://127.0.0.1:8020 ",
-    "deploy-local": "graph deploy MooToken --ipfs http://localhost:5001 --node http://127.0.0.1:8020"
+    "deploy-local": "graph deploy MooToken --ipfs https://downright-royal-saiph-graph-ipfs.skale.network/ --node https://downright-royal-saiph-graph-node.skale.network/"
   },
   "eslintConfig": {
     "extends": [

@@ -26,15 +26,23 @@ let generatedImageDirectory = fsEndpoint + "/" + uploadFile.stripHexPrefix(addre
     let jsonWithImageURL = await nftModification.changeImageURL(nftMetadataFileName, generatedImageDirectory + svgNewFileName);
     await uploadFile.uploadJson(skaleFileDirectory, uploadedMDFileName, jsonWithImageURL);
     console.log(generatedImageDirectory + uploadedMDFileName);
+    await new Promise(r => setTimeout(r, 2000));
 
     console.log("--------Mint an NFT with tokenId-------- ");
+
     await mooToken.mint(addressMinter, skaleFileDirectory + "/"+ uploadedMDFileName)
+    await new Promise(r => setTimeout(r, 2000));
 
     console.log("--------Stake an NFT with tokenId-------- ",tokenId);
+    
     await mooToken.stake(addressMinter,tokenId);
+    await new Promise(r => setTimeout(r, 2000));
+
     console.log("--------UnStake an NFT with tokenId-------- ",tokenId);
+
     await mooToken.unStake(addressMinter,tokenId);
+    await new Promise(r => setTimeout(r, 2000));
+
     console.log("--------Use an NFT with tokenId-------- ");
     await mooToken.use(addressMinter,tokenId);
 })();
-
