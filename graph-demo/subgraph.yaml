@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: MooToken
-    network: mainnet
+    network: skale
     source:
-      address: '0xE1E4905E8Faa4B2Cdd0A241B952C4615A42a176a'
+      address: '0xb713eAfca2f6984b3e7AdBc0531b1d37403812a8'
       abi: MooToken
-      startBlock: 690000
+      startBlock: 24000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
