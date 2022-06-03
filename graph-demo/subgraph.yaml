@@ -8,7 +8,7 @@ dataSources:
     name: MooToken
     network: skale
     source:
-      address: '0xb713eAfca2f6984b3e7AdBc0531b1d37403812a8'
+      address: '0xfd0c90284c739E14647165Aa295D6EE9E36640b9'
       abi: MooToken
       startBlock: 24000
     mapping:
