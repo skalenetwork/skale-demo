@@ -8,7 +8,7 @@ const nftModification = require('./NFTModification');
 const mooToken = require('./MooToken');
 const localFileDirectory = "./assets/";
 const uploadFile = require('./FileStorage');
-let generatedImageDirectory = fsEndpoint + "/" + uploadFile.stripHexPrefix(addressMinter)+"/";
+let generatedImageDirectory = fsEndpoint + "/" + uploadFile.stripHexPrefix(addressMinter) + "/" + skaleFileDirectory + "/" ;
 
 (async () => {
 
@@ -27,20 +27,13 @@ let generatedImageDirectory = fsEndpoint + "/" + uploadFile.stripHexPrefix(addre
     await uploadFile.uploadJson(skaleFileDirectory, uploadedMDFileName, jsonWithImageURL);
     console.log(generatedImageDirectory + uploadedMDFileName);
 
-    // console.log("--------Mint an NFT with tokenId-------- ");
-    // await mooToken.mint(addressMinter, skaleFileDirectory + "/"+ uploadedMDFileName)
-    // console.log(await mooToken.getUsed(addressMinter, tokenId ))
-    // console.log(await mooToken.getBalance(addressMinter, tokenId ))
-    // console.log(await mooToken.isStaked(addressMinter, tokenId ))
-    // console.log("--------Stake an NFT with tokenId-------- ");
-    // await mooToken.stake(addressMinter,tokenId )
-    // console.log(await mooToken.isStaked(addressMinter, tokenId ))
-    // console.log("--------UnStake an NFT with tokenId-------- ");
-    // await mooToken.unStake(addressMinter,tokenId )
-    // console.log(await mooToken.isStaked(addressMinter, tokenId ))
-    // console.log("--------Use an NFT with tokenId-------- ");
-    // await mooToken.use(addressMinter, tokenId)
-    // console.log(await mooToken.getUsed(addressMinter, tokenId ))
-    // console.log(await mooToken.getBalance(addressMinter, tokenId ))
+    console.log("--------Mint an NFT with tokenId-------- ");
+    await mooToken.mint(addressMinter, skaleFileDirectory + "/"+ uploadedMDFileName)
+    console.log("--------Stake an NFT with tokenId-------- ");
+    await mooToken.stake(addressMinter,parseInt(await mooToken.getCurrentTokenId()));
+    console.log("--------UnStake an NFT with tokenId-------- ");
+    // await mooToken.unStake(addressMinter,parseInt(await mooToken.getCurrentTokenId()));
+    console.log("--------Use an NFT with tokenId-------- ");
+    await mooToken.use(addressMinter, parseInt(await mooToken.getCurrentTokenId()));
 })();
 

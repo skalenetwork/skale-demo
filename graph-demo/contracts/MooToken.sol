@@ -54,7 +54,8 @@ contract MooToken is ERC721URIStorage, AccessControl, Ownable{
         string memory fullPath = concat(concat(_baseTokenURI,toAsciiString(msg.sender)),metadataURI);
         _setTokenURI(id,fullPath);
         _userBalance[id][msg.sender] = userBalance;
-        emit TokenMinted(owner, id, userBalance, metadataURI);
+        _staked[id][msg.sender]=false;
+        emit TokenMinted(owner, id, userBalance, fullPath);
     }
 
     function use(uint256 tokenId)  onlyOwner public{
@@ -68,22 +69,12 @@ contract MooToken is ERC721URIStorage, AccessControl, Ownable{
     }
 
     function stake(uint256 tokenId)  onlyOwner public{
-        require(
-            _staked[tokenId][msg.sender]  = false ,
-            "MooToken: Token is already Staked"
-        );
-
         _staked[tokenId][msg.sender]=true;
         emit TokenStaked(msg.sender, tokenId);
     }
 
     function unStake(uint256 tokenId) onlyOwner public{
-        require(
-            _staked[tokenId][msg.sender]  = true ,
-            "MooToken: Token is not staked!"
-        );
-
-        _staked[tokenId][msg.sender]=false;
+        _staked[tokenId][msg.sender] = false;
         emit TokenUnStaked(msg.sender, tokenId);
     }
 
@@ -100,21 +91,6 @@ contract MooToken is ERC721URIStorage, AccessControl, Ownable{
     }
     function getUsed(address member, uint256 tokenId) public view returns (uint256) {
         return _used[tokenId][member];
-    }
-
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint256 tokenId
-    )
-    internal
-    override
-    {
-        require(
-            _staked[tokenId][msg.sender]  = true ,
-            "MooToken: Token is staked, unstake to transfer"
-        );
-        super._beforeTokenTransfer(from, to, tokenId);
     }
 
 

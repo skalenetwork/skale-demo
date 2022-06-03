@@ -1,49 +1,61 @@
-import {TokenMinted,Transfer,TokenUsed} from '../generated/MooToken/MooToken'
+import {TokenMinted, Transfer, TokenUsed, TokenUnStaked, TokenStaked} from '../generated/MooToken/MooToken'
 import { MyMooToken } from '../generated/schema'
+import {  BigInt } from '@graphprotocol/graph-ts'
 
-
+let ONE = BigInt.fromI32(1)
+let ZERO = BigInt.fromI32(0)
 
 export function handleNewMooToken(event: TokenMinted): void {
-  let id = (event.params.from.toHex()+"-"+ event.params.tokenId.toString());
-
+  let id = event.params.tokenId.toString();
   let tokenMinted = new MyMooToken(id)
-  tokenMinted.from = event.params.from
+  tokenMinted.owner = event.params.from
   tokenMinted.tokenURI = event.params.tokenURI
-
+  tokenMinted.used = 0
+  tokenMinted.startingBalance = event.params.userBalance;
+  tokenMinted.balanceNow = event.params.userBalance;
+  tokenMinted.isStaked = false
+  tokenMinted.stakeCount = 0
+  tokenMinted.stakeTimeStamp = ZERO;
   tokenMinted.save()
-
 }
 
 export function handleTransferMooToken(event: Transfer): void {
 
-  let old_id = (event.params.from.toHex()+"-"+ event.params.tokenId.toString());
-  let new_id = event.params.to.toHex() + "-" + event.params.tokenId.toString();
-
-  let tokenMinted = MyMooToken.load(old_id)
-  let tokenTransfered = MyMooToken.load(new_id)
-  if(tokenTransfered==null) {
-    let tokenTransfered = new MyMooToken(new_id)
-    tokenTransfered.from = event.params.to
-    // tokenTransfered.used = ZERO;
-    tokenTransfered.tokenURI = tokenMinted.tokenURI
-    tokenTransfered.save()
-  }
-  else
-  {
-    if (tokenMinted) {
-      tokenTransfered.tokenURI = tokenMinted.tokenURI
-    }
+  let tokenId = event.params.tokenId.toString();
+  let tokenTransfered = MyMooToken.load(tokenId)
+  if (tokenTransfered) {
+    tokenTransfered.owner = event.params.to
     tokenTransfered.save()
   }
 }
 
-  export function handleUseMooToken(event: TokenUsed): void {
-      let id = event.params.from.toHex() + "-" + event.params.tokenId.toString();
-
-      let tokenMinted = MyMooToken.load(id)
-      if (tokenMinted != null) {
-          // tokenMinted.used = tokenMinted.used.plus(ONE)
-          tokenMinted.save()
-      }
+export function handleUseMooToken(event: TokenUsed): void {
+  let id = event.params.tokenId.toString();
+  let tokenMinted = MyMooToken.load(id)
+  if (tokenMinted) {
+    tokenMinted.used = tokenMinted.used + 1
+    tokenMinted.balanceNow = tokenMinted.balanceNow.minus(ONE)
+    tokenMinted.save()
   }
+}
+
+export function handleStakeMooToken(event: TokenStaked): void {
+  let id = event.params.tokenId.toString();
+  let tokenMinted = MyMooToken.load(id)
+  if (tokenMinted) {
+    tokenMinted.isStaked = true;
+    tokenMinted.stakeTimeStamp = event.block.timestamp;
+    tokenMinted.stakeCount = tokenMinted.stakeCount +1
+    tokenMinted.save();
+  }
+}
+
+export function handleUnStakeMooToken(event: TokenUnStaked): void {
+  let id = event.params.tokenId.toString();
+  let tokenMinted = MyMooToken.load(id)
+  if (tokenMinted) {
+    tokenMinted.isStaked = false;
+    tokenMinted.save()
+  }
+}
 

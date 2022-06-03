@@ -6,7 +6,6 @@ import {
   Value,
   ValueKind,
   store,
-  Address,
   Bytes,
   BigInt,
   BigDecimal
@@ -20,49 +19,41 @@ export class MyMooToken extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save MyMooToken entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save MyMooToken entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("MyMooToken", id.toString(), this);
+    assert(id != null, "Cannot save MyMooToken entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type MyMooToken must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("MyMooToken", id.toString(), this);
+    }
   }
 
   static load(id: string): MyMooToken | null {
-    return store.get("MyMooToken", id) as MyMooToken | null;
+    return changetype<MyMooToken | null>(store.get("MyMooToken", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    return value!.toString();
   }
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
   }
 
-  get from(): Bytes {
-    let value = this.get("from");
-    return value.toBytes();
+  get owner(): Bytes {
+    let value = this.get("owner");
+    return value!.toBytes();
   }
 
-  set from(value: Bytes) {
-    this.set("from", Value.fromBytes(value));
-  }
-
-  get type(): i32 {
-    let value = this.get("type");
-    return value.toI32();
-  }
-
-  set type(value: i32) {
-    this.set("type", Value.fromI32(value));
+  set owner(value: Bytes) {
+    this.set("owner", Value.fromBytes(value));
   }
 
   get tokenURI(): string | null {
     let value = this.get("tokenURI");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -70,27 +61,64 @@ export class MyMooToken extends Entity {
   }
 
   set tokenURI(value: string | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("tokenURI");
     } else {
-      this.set("tokenURI", Value.fromString(value as string));
+      this.set("tokenURI", Value.fromString(<string>value));
     }
   }
 
-  get used(): BigInt | null {
+  get used(): i32 {
     let value = this.get("used");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
+    return value!.toI32();
   }
 
-  set used(value: BigInt | null) {
-    if (value === null) {
-      this.unset("used");
-    } else {
-      this.set("used", Value.fromBigInt(value as BigInt));
-    }
+  set used(value: i32) {
+    this.set("used", Value.fromI32(value));
+  }
+
+  get startingBalance(): BigInt {
+    let value = this.get("startingBalance");
+    return value!.toBigInt();
+  }
+
+  set startingBalance(value: BigInt) {
+    this.set("startingBalance", Value.fromBigInt(value));
+  }
+
+  get balanceNow(): BigInt {
+    let value = this.get("balanceNow");
+    return value!.toBigInt();
+  }
+
+  set balanceNow(value: BigInt) {
+    this.set("balanceNow", Value.fromBigInt(value));
+  }
+
+  get isStaked(): boolean {
+    let value = this.get("isStaked");
+    return value!.toBoolean();
+  }
+
+  set isStaked(value: boolean) {
+    this.set("isStaked", Value.fromBoolean(value));
+  }
+
+  get stakeCount(): i32 {
+    let value = this.get("stakeCount");
+    return value!.toI32();
+  }
+
+  set stakeCount(value: i32) {
+    this.set("stakeCount", Value.fromI32(value));
+  }
+
+  get stakeTimeStamp(): BigInt {
+    let value = this.get("stakeTimeStamp");
+    return value!.toBigInt();
+  }
+
+  set stakeTimeStamp(value: BigInt) {
+    this.set("stakeTimeStamp", Value.fromBigInt(value));
   }
 }

@@ -22,7 +22,8 @@ async function stake(owner, tokenId) {
     let mooToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi);
     if (!await addressHasSFUEL) await transfer_sFUEL(owner)
     const res = await mooToken.connect(signer).stake(tokenId);
-    console.log("token is staked");
+    console.log("token is staked", await mooToken.connect(signer).getStake(owner, tokenId));
+    console.log(res);
     return res;
 }
 
@@ -30,7 +31,8 @@ async function unStake(owner, tokenId) {
     let mooToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi);
     if (!await addressHasSFUEL) await transfer_sFUEL(owner)
     const res = await mooToken.connect(signer).unStake(tokenId);
-    console.log("token is unStaked");
+    console.log("token is unStaked", await mooToken.connect(signer).getStake(owner, tokenId));
+    console.log(res);
     return res;
 }
 
@@ -49,10 +51,6 @@ async function getBalance(owner, tokenId) {
 async function getUsed(owner, tokenId) {
     let mooToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi);
     return parseInt(await mooToken.connect(signer).getUsed(owner,tokenId));
-}
-async function isStaked(owner, tokenId) {
-    let mooToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi);
-    return await mooToken.connect(signer).getStake(owner, tokenId);
 }
 
 
@@ -138,7 +136,6 @@ module.exports = {
     unStake,
     getBalance,
     getUsed,
-    isStaked,
     use,
     getGraphQueryTokens,
     getGraphQueryTokensUsed,

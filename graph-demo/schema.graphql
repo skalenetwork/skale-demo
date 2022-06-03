@@ -1,8 +1,12 @@
 type MyMooToken @entity {
   id: ID!
-  from: Bytes!
-  type: Int!
+  owner: Bytes!
   tokenURI: String
-  used: BigInt
+  used: Int
+  startingBalance: BigInt!
+  balanceNow: BigInt!
+  isStaked: Boolean
+  stakeCount: Int
+  stakeTimeStamp:BigInt!
 }
 
