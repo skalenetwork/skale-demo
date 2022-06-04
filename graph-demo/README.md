@@ -17,7 +17,9 @@
 ### Make sure these are added in your project.json for graph deployment:
 
 "create-local": "graph create MooToken --node https://downright-royal-saiph-graph-node.skale.network/",
+
 "remove-local": "graph remove MooToken --node https://downright-royal-saiph-graph-node.skale.network/",
+
 "deploy-local": "graph deploy MooToken --ipfs https://downright-royal-saiph-graph-ipfs.skale.network/ --node https://downright-royal-saiph-graph-node.skale.network/"
 
 
