@@ -14,6 +14,14 @@
 2.  COPY outputted contract address
     ex. `0xB2f089d6dC315E40B2bf61ed68D0a6BD5b23c2ef`
 
+### Make sure these are added in your project.json for graph deployment:
+
+"create-local": "graph create MooToken --node https://downright-royal-saiph-graph-node.skale.network/",
+"remove-local": "graph remove MooToken --node https://downright-royal-saiph-graph-node.skale.network/",
+"deploy-local": "graph deploy MooToken --ipfs https://downright-royal-saiph-graph-ipfs.skale.network/ --node https://downright-royal-saiph-graph-node.skale.network/"
+
+
+
 #### Update .env & subgraph.yaml with step 2 from Compile & Deploy 
 
 1. UPDATE <addContractAddress> in .env
