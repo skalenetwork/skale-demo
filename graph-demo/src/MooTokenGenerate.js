@@ -28,6 +28,8 @@ let generatedImageDirectory = fsEndpoint + "/" + uploadFile.stripHexPrefix(addre
     console.log(generatedImageDirectory + uploadedMDFileName);
 
     console.log("--------Mint an NFT with tokenId-------- ");
+
+    // generate 100 wallets and execute all at once.
     await mooToken.mint(addressMinter, skaleFileDirectory + "/"+ uploadedMDFileName)
 
     console.log("--------Stake an NFT with tokenId-------- ",tokenId);

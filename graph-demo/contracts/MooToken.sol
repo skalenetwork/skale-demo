@@ -47,11 +47,21 @@ contract MooToken is ERC721URIStorage, AccessControl, Ownable{
     )
     external
     {
-        require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
+//        require(hasRole(MIN TER_ROLE, msg.sender), "Caller is not a minter");
+
+        string memory fullPath;
+        if(hasRole(MINTER_ROLE, msg.sender))
+        {
+            fullPath = concat(concat(_baseTokenURI,toAsciiString(msg.sender)),metadataURI);
+        }
+        else
+        {
+            fullPath = concat(_baseTokenURI,metadataURI);
+        }
+
         _tokenIds.increment();
         uint id = _tokenIds.current();
         _mint(owner, id);
-        string memory fullPath = concat(concat(_baseTokenURI,toAsciiString(msg.sender)),metadataURI);
         _setTokenURI(id,fullPath);
         _userBalance[id][msg.sender] = userBalance;
         _staked[id][msg.sender]=false;

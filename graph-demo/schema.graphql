@@ -11,7 +11,6 @@ type MyMooToken @entity {
   tokOwner: Owner!
 }
 
-
 type Owner @entity {
   id: ID!
   from: Bytes!

@@ -36,6 +36,21 @@ const changeSvgColor = async (fileName) => {
     }
 };
 
+
+const createNewWallets = (wallets) => {
+    let newFileName = `wallets.txt`
+    let pathFile = `./assets/${newFileName}`
+    fs.writeFile(
+        path.resolve(__dirname, pathFile),
+        wallets,
+        function (err) {
+            console.log(err);
+        }
+    );
+    return newFileName;
+}
+
+
 const changeImageURL = (fileName, tokenImageURL) => {
     let check = false;
     try {
@@ -72,5 +87,6 @@ const setBg = () => {
 
 module.exports = {
     changeSvgColor,
-    changeImageURL
+    changeImageURL,
+    createNewWallets
 };

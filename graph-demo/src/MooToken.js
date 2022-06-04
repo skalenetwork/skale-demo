@@ -2,6 +2,7 @@ const contract = require("../abi/"+process.env.REACT_APP_ABI_NAME);
 const ethers = require("ethers");
 const endpoint = process.env.REACT_APP_ENDPOINT;
 const pk = process.env.REACT_APP_PRIVATE_KEY;
+const Web3 = require("web3");
 
 const web3Provider = new ethers.providers.JsonRpcProvider(endpoint)
 const signer = new ethers.Wallet(pk, web3Provider);
@@ -17,6 +18,15 @@ async function mint(owner, stroagePath) {
     console.log("token is minted");
     return res;
 }
+
+
+async function mintWithGeneratedWallets(pkNew,owner, stroagePath) {
+    const signerNew = new ethers.Wallet(pkNew, web3Provider);
+    let mooToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi);
+    console.log("request to mint to:", owner)
+    return await mooToken.connect(signerNew).mint(owner, 5, stroagePath);
+}
+
 
 async function stake(owner, tokenId) {
     let mooToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi);
@@ -59,11 +69,20 @@ async function getCurrentTokenId() {
 }
 
 async function addressHasSFUEL(address) {
-    let addressBalance = await web3Provider.eth.getBalance(address);
+    const web3 = new Web3(web3Provider);
+    let addressBalance = web3.eth.getBalance(address, function(err, result) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log((web3.utils.fromWei(result, "ether")));
+        }
+    })
+
     if (addressBalance < 0.1) {
         console.log("Address Balance is low")
         return false;
     }
+    console.log("Wallet balance", addressBalance)
     return true;
 }
 
@@ -94,7 +113,7 @@ async function addressHasSFUEL(address) {
 async function transfer_sFUEL(receiverAddress) {
     // Create a wallet instance
     console.log("amountInETH");
-    let wallet = new ethers.Wallet(process.env.REACT_APP_PRIVATE_KEY, customHttpProvider)
+    let wallet = new ethers.Wallet(process.env.REACT_APP_PRIVATE_KEY, web3Provider)
     // Ether amount to send
     let amountInEther = '0.01'
     // Create a transaction object
@@ -110,6 +129,18 @@ async function transfer_sFUEL(receiverAddress) {
         })
 }
 
+
+async function generateNew() {
+    let wallet = ethers.Wallet.createRandom().connect(web3Provider);
+    // if (!await addressHasSFUEL(wallet.address))
+    await transfer_sFUEL(wallet.address.toString())
+    // await addressHasSFUEL(wallet.address.toString());
+    console.log(wallet.address + "-" + wallet.privateKey + "\n");
+    return wallet.address + "-" + wallet.privateKey + "\n";
+}
+
+
+
 module.exports = {
     mint,
     stake,
@@ -118,5 +149,6 @@ module.exports = {
     getUsed,
     use,
     getGraphQueryTokensUsed,
-    getCurrentTokenId
+    getCurrentTokenId,
+    mintWithGeneratedWallets
 };
