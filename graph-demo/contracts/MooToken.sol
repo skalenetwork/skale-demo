@@ -47,8 +47,6 @@ contract MooToken is ERC721URIStorage, AccessControl, Ownable{
     )
     external
     {
-//        require(hasRole(MIN TER_ROLE, msg.sender), "Caller is not a minter");
-
         string memory fullPath;
         if(hasRole(MINTER_ROLE, msg.sender))
         {
@@ -68,22 +66,17 @@ contract MooToken is ERC721URIStorage, AccessControl, Ownable{
         emit TokenMinted(owner, id, userBalance, fullPath);
     }
 
-    function use(uint tokenId)  onlyOwner public{
-        require(
-            _userBalance[tokenId][msg.sender]  >= 1 + _used[tokenId][msg.sender],
-            "MooToken: Not enough balance to use for Events"
-        );
-
+    function use(uint tokenId)  public{
         _used[tokenId][msg.sender]++;
         emit TokenUsed(msg.sender, tokenId, 1);
     }
 
-    function stake(uint tokenId)  onlyOwner public{
+    function stake(uint tokenId)  public{
         _staked[tokenId][msg.sender]=true;
         emit TokenStaked(msg.sender, tokenId);
     }
 
-    function unStake(uint tokenId) onlyOwner public{
+    function unStake(uint tokenId) public{
         emit TokenUnStaked(msg.sender, tokenId);
     }
 

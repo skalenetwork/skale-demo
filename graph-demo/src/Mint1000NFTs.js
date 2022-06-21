@@ -3,62 +3,91 @@ const mooToken = require('./MooToken');
 const fs = require("fs");
 const path = require("path");
 
+const skaleFileDirectory= process.env.REACT_NFT_CONTRACT_ADDRESS;
+const nftFileName = "Joey.svg";
+const fsEndpoint = process.env.REACT_APP_FS_ENDPOINT;
+const addressMinter = process.env.REACT_APP_ACCOUNT;
+const nftMetadataFileName = "JoeyMetadata.json";
+const localFileDirectory = "./assets/";
+const uploadFile = require('./FileStorage');
+let generatedImageDirectory = fsEndpoint + "/" + uploadFile.stripHexPrefix(addressMinter) + "/" + skaleFileDirectory + "/" ;
+const nftModification = require('./NFTModification');
+
 (async () => {
         // for(let tokenId=1; tokenId<1000; tokenId++ ) {
         //         // walletIds += await mooToken.generateNew();
         // }
         // nftModification.createNewWallets(walletIds);
 
-        let file = fs.readFileSync(
-            path.resolve(__dirname,  "./assets/wallets.csv"),
-            "utf8"
-        );
 
-        let res = {};
-        res.wallets = file
-            .split(',').map(e => ({
-                    "wallet": e.split('\n')[0],
-                    "pk": e.split('\n')[1]
-            }));
-        try {
-        let counter = 1;
-        for(let wlt of res.wallets) {
-                if (wlt.wallet !== undefined && wlt.pk !== undefined && counter<1000) {
-                        console.log(wlt.wallet)
-                        console.log(wlt.pk)
-                        let jsonNo = counter % 100
-                        if (jsonNo === 0) jsonNo = 1;
-                        try {
-                                mooToken.mintWithGeneratedWallets(wlt.wallet, wlt.pk,  "905173b6c0a51925d3c9b619466c623c754fb7bb/0xE1E4905E8Faa4B2Cdd0A241B952C4615A42a176a/" + counter % 100 + ".json").then((quote) => {
-                                        // console.log(quote);
-                                }).catch((error) => {
-                                        console.error("Connection lost trying again");
-                                });
+        for(let tokenId=33; tokenId<100; tokenId++ ) {
+                console.log("--------Changing SVG colors--------")
+                let svgNewFileName = await nftModification.changeSvgColor(nftFileName);
 
-                                if (counter % 100 === 0) {
-                                        await sleep(6000)
-                                }
-                        }
-                        catch (err)
-                        {
-                           console.log("connection lost!")
-                        }
-                }
-                //
-                counter++;
-        }
-        }
-        catch (err)
-        {
-                console.log("connection lost!")
-                // sleep(6000)
+                console.log("--------Uploading new nft to FileStorage--------");
+                 uploadFile.uploadFile(skaleFileDirectory, localFileDirectory, svgNewFileName);
+                console.log(generatedImageDirectory + svgNewFileName);
+
+                console.log("--------Uploading new nft metadata to FileStorage--------", await mooToken.getCurrentTokenId());
+                const uploadedMDFileName = tokenId + ".json";
+
+                let jsonWithImageURL = await nftModification.changeImageURL(nftMetadataFileName, generatedImageDirectory + svgNewFileName);
+                 uploadFile.uploadJson(skaleFileDirectory, uploadedMDFileName, jsonWithImageURL);
+                console.log(generatedImageDirectory + uploadedMDFileName);
+
         }
 
-        function sleep(ms) {
-                return new Promise((resolve) => {
-                        setTimeout(resolve, ms);
-                });
-        }
+
+        // let file = fs.readFileSync(
+        //     path.resolve(__dirname,  "./assets/wallets.csv"),
+        //     "utf8"
+        // );
+        //
+        // let res = {};
+        // res.wallets = file
+        //     .split(',').map(e => ({
+        //             "wallet": e.split('\n')[0],
+        //             "pk": e.split('\n')[1]
+        //     }));
+        // try {
+        // let counter = 1;
+        // for(let wlt of res.wallets) {
+        //         if (wlt.wallet !== undefined && wlt.pk !== undefined && counter<1000) {
+        //                 console.log(wlt.wallet)
+        //                 console.log(wlt.pk)
+        //                 let jsonNo = counter % 100
+        //                 if (jsonNo === 0) jsonNo = 1;
+        //                 try {
+        //                         mooToken.mintWithGeneratedWallets(wlt.wallet, wlt.pk,  "905173B6C0A51925d3C9B619466c623c754Fb7BB/0x780fEc8d3C552653b8B0c0f875aBC99A6BA8FC25/" + counter % 100 + ".json").then((quote) => {
+        //                                 // console.log(quote);
+        //                         }).catch((error) => {
+        //                                 console.error("Connection lost trying again");
+        //                         });
+        //
+        //                         if (counter % 100 === 0) {
+        //                                 await sleep(6000)
+        //                         }
+        //                 }
+        //                 catch (err)
+        //                 {
+        //                    console.log("connection lost!")
+        //                 }
+        //         }
+        //         //
+        //         counter++;
+        // }
+        // }
+        // catch (err)
+        // {
+        //         console.log("connection lost!")
+        //         // sleep(6000)
+        // }
+        //
+        // function sleep(ms) {
+        //         return new Promise((resolve) => {
+        //                 setTimeout(resolve, ms);
+        //         });
+        // }
 
 
         // let counter=1;
