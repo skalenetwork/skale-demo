@@ -22,7 +22,7 @@ const StrangeToken = require('./StrangeToken');
                                 console.log("strt: ", strt);
                                 console.log("tokenId: ", current_tokenId);
                                 if (tokenId % 10 === 0) {
-                                        await sleep(10000);
+                                        await sleep(6000);
                                 }
                                 StrangeToken.mint(current_tokenId, nonce).then((quote) => {
                                         console.log(quote["hash"]);
