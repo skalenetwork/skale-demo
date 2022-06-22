@@ -17,11 +17,12 @@ contract StrangeToken is ERC721URIStorage{
     // Counters.Counter private _tokenIds;
     string[] palette;
     string svg;
-    uint last_tokenid;
     event TokenMinted(address from, uint tokenId, string tokenURI);
+    mapping(uint => uint) public last_tokenid;
 
 
     constructor() ERC721("StrangeToken", "Strange") {
+        last_tokenid[0] = 0;
         palette.push("blue");
         palette.push("red");
         palette.push("maroon");
@@ -41,25 +42,33 @@ contract StrangeToken is ERC721URIStorage{
         // _tokenIds.increment();
         // uint id = _tokenIds.current();
         _mint(msg.sender, id);
-        last_tokenid = id;
+        last_tokenid[0] = max(last_tokenid[0], id);
         string memory tokenURI =  constructTokenURI();
         _setTokenURI(id,tokenURI);
         emit TokenMinted(msg.sender, id, tokenURI );
     }
 
+    function max(uint highest_val,uint new_value) private pure returns (uint) {
+        if(new_value <highest_val)
+        {
+            return highest_val;
+        }
+        else
+        {
+            return new_value;
+        }
+    }
+
     function getSVG() public view returns (string memory) {
         return svg;
     }
-    function getCurrentTokenId() public view returns (uint ) {
-        return last_tokenid;
+    function getCurrentTokenId() public view returns (uint) {
+        return last_tokenid[0];
     }
 
     /********************
     Utility Stuff Starts
     *********************/
-    function concat(string memory first, string memory second) private pure returns (string memory){
-        return string(abi.encodePacked(first,'/',second));
-    }
 
     function getRandomNumber(uint mode) public view returns (uint )
     {
@@ -87,7 +96,7 @@ contract StrangeToken is ERC721URIStorage{
         return
         string(
             abi.encodePacked(
-                "data:image/svg+xml;base64",
+                "data:image/svg+xml;base64,",
                 image
             )
         );

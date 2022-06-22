@@ -19,12 +19,16 @@ const StrangeToken = require('./StrangeToken');
 
                         for (let tokenId = strt ;tokenId <= 100; tokenId++) {
                                 console.log("nonce: ", nonce);
+                                console.log("strt: ", strt);
                                 console.log("tokenId: ", current_tokenId);
                                 if (tokenId % 10 === 0) {
-                                        await sleep(6000);
+                                        await sleep(10000);
                                 }
-                                StrangeToken.mint(current_tokenId,nonce).then(r => {
-                                        console.log(r)
+                                StrangeToken.mint(current_tokenId, nonce).then((quote) => {
+                                        console.log(quote["hash"]);
+                                        // StrangeToken.getRevertReason(quote["hash"]);
+                                }).catch((error) => {
+                                        console.error("Connection lost ", error);
                                 });
                                 current_tokenId++
                                 nonce++;
@@ -32,9 +36,9 @@ const StrangeToken = require('./StrangeToken');
                 } catch (err) {
                         console.log("connection lost!",err)
                         await sleep(4000);
-                        await execute_txs(startingTxCount);
                 }
         }
+
 
 
         // let counter=1;

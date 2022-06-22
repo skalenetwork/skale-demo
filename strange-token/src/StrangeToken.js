@@ -13,12 +13,40 @@ async function mint(tokenId, nonce) {
         nonce:nonce
     }
     console.log("nonce",nonce);
-    let StrangeToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi);
-    console.log("token starting to mint...")
+    let StrangeToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi, web3Provider);
+
+    const estimation = await StrangeToken.estimateGas.mint(tokenId, overrides);
+
+    console.log("token starting to mint... gas fee ", ethers.utils.formatUnits(estimation, "wei"))
     const res = StrangeToken.connect(signer).mint(tokenId, overrides);
-    console.log("token is minted");
     return res;
 }
+
+async function getRevertReason(txHash){
+    try {
+        const tx = await web3Provider.getTransaction(txHash)
+
+        var result = await web3Provider.call(tx, tx.blockNumber)
+
+        result = result.startsWith('0x') ? result : `0x${result}`
+
+        if (result && result.substr(138)) {
+
+            const reason = web3Provider.utils.toAscii(result.substr(138))
+            console.log('Revert reason:', reason)
+            return reason
+
+        } else {
+            console.log('Cannot get reason - No return value')
+        }
+    }
+    catch (err)
+    {
+        console.log('Error occured with return reason',err)
+    }
+
+}
+
 
 async function getCurrentTokenId() {
     let StrangeToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi);
@@ -79,7 +107,7 @@ async function getTransactionCount() {
 
 
 module.exports = {
-    mint,
+    mint,getRevertReason,
     getTransactionCount,
     getCurrentTokenId
 };

@@ -232,6 +232,25 @@
     },
     {
         "type": "function",
+        "name": "last_tokenid",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": ""
+            }
+        ],
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": ""
+            }
+        ]
+    },
+    {
+        "type": "function",
         "name": "mint",
         "constant": false,
         "payable": false,

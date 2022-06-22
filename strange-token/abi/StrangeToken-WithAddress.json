@@ -1,5 +1,5 @@
 {
-    "erc721_address": "0x8d3F1D881F07aF53c9A554b8955270509932aB6c",
+    "erc721_address": "0x6f48fc4c687c27c637790a3e32f1Cb8C1c12f14c",
     "erc721_abi": [
         {
             "type": "constructor",
@@ -228,6 +228,25 @@
             "outputs": [
                 {
                     "type": "bool",
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "last_tokenid",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "uint256",
+                    "name": ""
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "uint256",
                     "name": ""
                 }
             ]
