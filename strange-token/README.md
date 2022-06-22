@@ -22,5 +22,5 @@ REACT_NFT_CONTRACT_ADDRESS = 0x8E47c491B4D2BDb86931f21C
 
 To mint 1000 NFTs
 ```
-
+node src/Mint1000NFTs.js 
 ```
