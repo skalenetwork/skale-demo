@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.30.3",
-    "@graphprotocol/graph-ts": "0.27.0",
     "@nomiclabs/hardhat-ethers": "^2.0.6",
     "@nomiclabs/hardhat-etherscan": "^3.0.4",
     "@nomiclabs/hardhat-web3": "^2.0.0",
@@ -29,13 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "compile": "npx hardhat clean && npx hardhat compile",
-    "deploy": "npx hardhat erc721 --network custom",
-    "codegen": "graph codegen",
-    "create-local": "graph create StrangeToken --node http://127.0.0.1:8020",
-    "remove-local": "graph remove StrangeToken --node http://127.0.0.1:8020",
-    "redeploy-local": "graph remove StrangeToken --node http://127.0.0.1:8020 && graph codegen && graph create StrangeToken --node http://127.0.0.1:8020 && graph deploy StrangeToken --ipfs http://localhost:5001 --node http://127.0.0.1:8020 ",
-    "deploy-local": "graph deploy StrangeToken --ipfs http://localhost:5001 --node http://127.0.0.1:8020"
-  },
+    "deploy": "npx hardhat erc721 --network custom"
+    },
   "eslintConfig": {
     "extends": [
       "react-app",
