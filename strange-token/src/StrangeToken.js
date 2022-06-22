@@ -10,7 +10,8 @@ const signer = new ethers.Wallet(pk, web3Provider);
 async function mint(tokenId, nonce) {
 
     const overrides = {
-        nonce:nonce
+        nonce:nonce,
+        gasLimit:5000000
     }
     console.log("nonce",nonce);
     let StrangeToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi, web3Provider);
@@ -42,7 +43,7 @@ async function getRevertReason(txHash){
     }
     catch (err)
     {
-        console.log('Error occured with return reason',err)
+        console.log('Error occured with return reason',txHash , err)
     }
 
 }
