@@ -14,17 +14,19 @@ const StrangeToken = require('./StrangeToken');
         async function execute_txs(startingTxCount) {
                 try {
                         let nonce = await StrangeToken.getTransactionCount();
-                        let tokenId = await startingTxCount - nonce;
-                        for (tokenId <= 100; tokenId++;) {
+                        let strt = startingTxCount - nonce;
+                        let current_tokenId = await StrangeToken.getCurrentTokenId()+strt;
+
+                        for (let tokenId = strt ;tokenId <= 100; tokenId++) {
                                 console.log("nonce: ", nonce);
-                                console.log("tokenId: ", tokenId);
-                                console.log("startingTxCount: ",startingTxCount);
+                                console.log("tokenId: ", current_tokenId);
                                 if (tokenId % 10 === 0) {
-                                        await sleep(4000);
+                                        await sleep(6000);
                                 }
-                                StrangeToken.mint(tokenId,nonce).then(r => {
+                                StrangeToken.mint(current_tokenId,nonce).then(r => {
                                         console.log(r)
                                 });
+                                current_tokenId++
                                 nonce++;
                         }
                 } catch (err) {
