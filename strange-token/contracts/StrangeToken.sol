@@ -17,6 +17,7 @@ contract StrangeToken is ERC721URIStorage{
     // Counters.Counter private _tokenIds;
     string[] palette;
     string svg;
+    uint last_tokenid;
     event TokenMinted(address from, uint tokenId, string tokenURI);
 
 
@@ -40,17 +41,17 @@ contract StrangeToken is ERC721URIStorage{
         // _tokenIds.increment();
         // uint id = _tokenIds.current();
         _mint(msg.sender, id);
+        last_tokenid = id;
         string memory tokenURI =  constructTokenURI();
         _setTokenURI(id,tokenURI);
         emit TokenMinted(msg.sender, id, tokenURI );
     }
-//
-//    function getCurrentTokenId() public view returns (uint) {
-//        return _tokenIds.current();
-//    }
 
     function getSVG() public view returns (string memory) {
         return svg;
+    }
+    function getCurrentTokenId() public view returns (uint ) {
+        return last_tokenid;
     }
 
     /********************

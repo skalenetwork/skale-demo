@@ -162,6 +162,20 @@
     },
     {
         "type": "function",
+        "name": "getCurrentTokenId",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": ""
+            }
+        ]
+    },
+    {
+        "type": "function",
         "name": "getRandomNumber",
         "constant": true,
         "stateMutability": "view",

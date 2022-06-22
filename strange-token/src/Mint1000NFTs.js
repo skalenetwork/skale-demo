@@ -30,7 +30,7 @@ const StrangeToken = require('./StrangeToken');
                                 nonce++;
                         }
                 } catch (err) {
-                        console.log("connection lost!")
+                        console.log("connection lost!",err)
                         await sleep(4000);
                         await execute_txs(startingTxCount);
                 }
