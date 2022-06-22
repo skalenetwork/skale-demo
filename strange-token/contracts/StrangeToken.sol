@@ -70,10 +70,10 @@ contract StrangeToken is ERC721URIStorage{
     Utility Stuff Starts
     *********************/
 
-    function getRandomNumber(uint mode) public view returns (uint )
+    function getRandomNumber() public view returns (uint )
     {
         bytes32 res = getRandom();
-        uint256 num = uint256(res) % mode;
+        uint256 num = uint256(res);
         return num;
     }
 
@@ -105,15 +105,27 @@ contract StrangeToken is ERC721URIStorage{
 
 
     function generateSVG() internal view returns (string memory) {
-        uint palette_no = getRandomNumber(10);
-        string memory x_axis = Strings.toString(getRandomNumber(900));
-        string memory y_axis = Strings.toString(getRandomNumber(1000));
-        string memory radius = Strings.toString(getRandomNumber(100));
+
+        uint no = getRandomNumber();
 
         string memory yo_svg = string(abi.encodePacked(
                 "<svg height='1100' width='1100' xmlns='http://www.w3.org/2000/svg' version='1.1'> ",
-                "<circle cx='",x_axis,"' cy='",y_axis,"' r='",radius,"' stroke='black' stroke-width='3' fill='",
-                palette[palette_no],"'/>",
+                "<circle cx='",Strings.toString(no%900),
+                    "' cy='",Strings.toString(no%1000),
+                    "' r='",Strings.toString(no%100),
+                    "' stroke='black' stroke-width='3' fill='", palette[no%10],"'/>",
+
+                    "<circle cx='",Strings.toString(no%902),
+                    "' cy='",Strings.toString(no%1002),
+                    "' r='",Strings.toString(no%102),
+                    "' stroke='black' stroke-width='3' fill='", palette[no%8],"'/>",
+
+
+                    "<circle cx='",Strings.toString(no%904),
+                    "' cy='",Strings.toString(no%1001),
+                    "' r='",Strings.toString(no%101),
+                    "' stroke='black' stroke-width='3' fill='", palette[no%9],"'/>",
+
                 "</svg>"
             ));
 

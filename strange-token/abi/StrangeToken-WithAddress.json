@@ -1,5 +1,5 @@
 {
-    "erc721_address": "0x6f48fc4c687c27c637790a3e32f1Cb8C1c12f14c",
+    "erc721_address": "0x0b0d6E0EabEC26412d9658f983bc08cAD8eBc8E8",
     "erc721_abi": [
         {
             "type": "constructor",
@@ -182,12 +182,7 @@
             "constant": true,
             "stateMutability": "view",
             "payable": false,
-            "inputs": [
-                {
-                    "type": "uint256",
-                    "name": "mode"
-                }
-            ],
+            "inputs": [],
             "outputs": [
                 {
                     "type": "uint256",

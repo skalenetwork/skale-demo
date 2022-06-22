@@ -180,12 +180,7 @@
         "constant": true,
         "stateMutability": "view",
         "payable": false,
-        "inputs": [
-            {
-                "type": "uint256",
-                "name": "mode"
-            }
-        ],
+        "inputs": [],
         "outputs": [
             {
                 "type": "uint256",
