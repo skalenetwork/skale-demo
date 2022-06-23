@@ -11,14 +11,14 @@ async function mint(tokenId, nonce) {
 
     const overrides = {
         nonce:nonce,
-        gasLimit:5000000
+        gasLimit:10000000
     }
     console.log("nonce",nonce);
     let StrangeToken = new ethers.Contract(contract.erc721_address, contract.erc721_abi, web3Provider);
 
-    const estimation = await StrangeToken.estimateGas.mint(tokenId, overrides);
+    // const estimation = await StrangeToken.estimateGas.mint(tokenId, overrides);
 
-    console.log("token starting to mint... gas fee ", ethers.utils.formatUnits(estimation, "wei"))
+    // console.log("token starting to mint... gas fee ", ethers.utils.formatUnits(estimation, "wei"))
     const res = StrangeToken.connect(signer).mint(tokenId, overrides);
     return res;
 }

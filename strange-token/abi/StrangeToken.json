@@ -133,7 +133,12 @@
         "name": "constructTokenURI",
         "constant": false,
         "payable": false,
-        "inputs": [],
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "tokenId"
+            }
+        ],
         "outputs": [
             {
                 "type": "string",

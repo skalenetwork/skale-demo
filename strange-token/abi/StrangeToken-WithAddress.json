@@ -1,5 +1,5 @@
 {
-    "erc721_address": "0x0b0d6E0EabEC26412d9658f983bc08cAD8eBc8E8",
+    "erc721_address": "0xa59f1c7cC82383f92d04388744DdC831f8d54D46",
     "erc721_abi": [
         {
             "type": "constructor",
@@ -135,7 +135,12 @@
             "name": "constructTokenURI",
             "constant": false,
             "payable": false,
-            "inputs": [],
+            "inputs": [
+                {
+                    "type": "uint256",
+                    "name": "tokenId"
+                }
+            ],
             "outputs": [
                 {
                     "type": "string",

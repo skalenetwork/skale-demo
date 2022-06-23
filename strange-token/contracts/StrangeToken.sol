@@ -43,7 +43,7 @@ contract StrangeToken is ERC721URIStorage{
         // uint id = _tokenIds.current();
         _mint(msg.sender, id);
         last_tokenid[0] = max(last_tokenid[0], id);
-        string memory tokenURI =  constructTokenURI();
+        string memory tokenURI =  constructTokenURI(id);
         _setTokenURI(id,tokenURI);
         emit TokenMinted(msg.sender, id, tokenURI );
     }
@@ -89,8 +89,8 @@ contract StrangeToken is ERC721URIStorage{
     }
 
 
-    function constructTokenURI() public returns (string memory) {
-        svg = generateSVG();
+    function constructTokenURI(uint tokenId) public returns (string memory) {
+        svg = generateSVG(tokenId);
         string memory image = Base64.encode(bytes(svg));
 
         return
@@ -104,27 +104,27 @@ contract StrangeToken is ERC721URIStorage{
 
 
 
-    function generateSVG() internal view returns (string memory) {
+    function generateSVG(uint tokenId) internal view returns (string memory) {
 
         uint no = getRandomNumber();
-
+        uint rnd10 = (tokenId%10);
         string memory yo_svg = string(abi.encodePacked(
                 "<svg height='1100' width='1100' xmlns='http://www.w3.org/2000/svg' version='1.1'> ",
-                "<circle cx='",Strings.toString(no%900),
-                    "' cy='",Strings.toString(no%1000),
-                    "' r='",Strings.toString(no%100),
-                    "' stroke='black' stroke-width='3' fill='", palette[no%10],"'/>",
+                "<circle cx='",Strings.toString(no%(900-rnd10)),
+                "' cy='",Strings.toString(no%(1000-rnd10)),
+                "' r='",Strings.toString(no%(100-rnd10)),
+                "' stroke='black' stroke-width='3' fill='", palette[no%10],"'/>",
 
-                    "<circle cx='",Strings.toString(no%902),
-                    "' cy='",Strings.toString(no%1002),
-                    "' r='",Strings.toString(no%102),
-                    "' stroke='black' stroke-width='3' fill='", palette[no%8],"'/>",
+                "<circle cx='",Strings.toString(no%(902-rnd10)),
+                "' cy='",Strings.toString(no%(1002-rnd10)),
+                "' r='",Strings.toString(no%(102-rnd10)),
+                "' stroke='black' stroke-width='3' fill='", palette[no%8],"'/>",
 
 
-                    "<circle cx='",Strings.toString(no%904),
-                    "' cy='",Strings.toString(no%1001),
-                    "' r='",Strings.toString(no%101),
-                    "' stroke='black' stroke-width='3' fill='", palette[no%9],"'/>",
+                "<circle cx='",Strings.toString(no%(901-rnd10)),
+                "' cy='",Strings.toString(no%(1001-rnd10)),
+                "' r='",Strings.toString(no%(101-rnd10)),
+                "' stroke='black' stroke-width='3' fill='", palette[no%5],"'/>",
 
                 "</svg>"
             ));
