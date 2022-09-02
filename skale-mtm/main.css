@@ -1,0 +1,41 @@
+body {
+    background-color:black;
+    padding: 2em;
+    font-family: 'Raleway','Source Sans Pro', 'Arial';
+    color: white;
+}
+.container {
+    width: 50%;
+    margin: 0 auto;
+}
+label {
+    display:block;
+    margin-bottom:10px;
+}
+input {
+    padding:10px;
+    width: 50%;
+    margin-bottom: 1em;
+    background-color: black;
+    border: transparent;
+    border-bottom: 1px solid #8BFCD9;
+    text-align: center;
+}
+
+img{
+    width: 100px;
+    background-color: #00BAFF;
+}
+button {
+    margin: 2em 0;
+    padding: 1em 4em;
+    display:block;
+    background-color: black;
+    border: 1px solid #8BFCD9;
+    color: #8BFCD9;
+}
+#tokenid {
+    color: #29FF94;
+    margin: 1em 0;
+
+}
