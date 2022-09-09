@@ -1,5 +1,5 @@
 require('dotenv').config()
-const StrangeToken = require('./StrangeToken');
+const StrangeToken = require('./EthersMTMToken');
 
 (async () => {
         await execute_txs();
