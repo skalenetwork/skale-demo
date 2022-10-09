@@ -1,0 +1,11 @@
+{
+  "name": "gaming_token",
+  "version": "1.0.0",
+  "description": "Gaming token ERC-721",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SKALE",
+  "license": "ISC"
+}
