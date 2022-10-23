@@ -1,3 +1,7 @@
+# Intented Usage 
+This project is intended for the Hackathon ETHSF. You can go here for the details https://hackathon.skale.network/
+If you want to have access to this project outside of the hackathon you can reach out to the Skale team via Discord.
+
 # Project setup
 
 ## Clone the skale-demo repository
