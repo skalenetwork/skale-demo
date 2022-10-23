@@ -5,22 +5,24 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const hre = require("hardhat");
+const { getAbi } = require('../tools/abi');
+const  { promises } = require("fs");
+const fs = promises;
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  const contractName = "GamingToken";
+  const erc721Factory = await ethers.getContractFactory(contractName);
+  const erc721 = await erc721Factory.deploy();
+  await erc721.deployTransaction.wait();
+  console.log("ERC721 Token GamingToken was deployed");
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
-
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
-
-  await lock.deployed();
-
-  console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-  );
+  console.log("Address:", erc721.address);
+  console.log('Please, add this contract address to .env file as CONTRACT_ADDRESS!')
+  const jsonObj = {};
+  jsonObj.erc721_address = erc721.address;
+  jsonObj.erc721_abi = getAbi(erc721.interface);
+  await fs.writeFile("abi/" + contractName + "-WithAddress.json", JSON.stringify(jsonObj, null, 4));
+  await fs.writeFile("abi/" + contractName + ".json", JSON.stringify(jsonObj.erc721_abi, null, 4));
 }
 
 // We recommend this pattern to be able to use async/await everywhere

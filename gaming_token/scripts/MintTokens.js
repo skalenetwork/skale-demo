@@ -1,5 +1,6 @@
 const GamingToken = require("./GamingToken");
 
+ethers.getContractAt(address, abi)
 const traits = {
   hairColor: ["red", "blue", "green"],
   stamina: ["123", "234", "345"],

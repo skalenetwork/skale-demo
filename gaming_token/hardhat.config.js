@@ -1,24 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
-const { task } = require("hardhat/config");
-const { getAbi } = require('./tools/abi');
-const  { promises } = require("fs");
-const fs = promises;
-require('dotenv').config()
-
-task("deploy-token", "Deploy ERC-721 token").setAction(async (args, {ethers}) => {
-  const contractName = "GamingToken";
-  const erc721Factory = await ethers.getContractFactory(contractName);
-  const erc721 = await erc721Factory.deploy();
-  await erc721.deployTransaction.wait();
-  console.log("ERC721 Token GamingToken was deployed");
-
-  console.log("Address:", erc721.address);
-  const jsonObj = {};
-  jsonObj.erc721_address = erc721.address;
-  jsonObj.erc721_abi = getAbi(erc721.interface);
-  await fs.writeFile("abi/" + contractName + "-WithAddress.json", JSON.stringify(jsonObj, null, 4));
-  await fs.writeFile("abi/" + contractName + ".json", JSON.stringify(jsonObj.erc721_abi, null, 4));
-});
+require('dotenv').config();
 
 function getCustomUrl(url) {
   if (url) {
