@@ -1,6 +1,5 @@
 const GamingToken = require("./GamingToken");
 
-ethers.getContractAt(address, abi)
 const traits = {
   hairColor: ["red", "blue", "green"],
   stamina: ["123", "234", "345"],
@@ -24,48 +23,44 @@ const generateRandomTraits = () => {
 
   return JSON.stringify(newTraits);
 };
+const sleep = (ms) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
 
 (async () => {
-  await execute_txs();
+  await mintTokens();
 
-  function sleep(ms) {
-    return new Promise((resolve) => {
-      setTimeout(resolve, ms);
-    });
-  }
-
-  async function execute_txs() {
+  async function mintTokens() {
     try {
-      await GamingToken.getTransactionCount().then(async (initialNonce) => {
-        for (let idx = 0; idx < 100; idx++) {
-          if (idx % 20 === 0) {
-            await sleep(6000);
-          }
-          const uri = generateRandomTraits();
+      const initialNonce = await GamingToken.getTransactionCount();
 
-          const nonce = initialNonce + idx;
-          GamingToken.mint(uri, nonce)
-            .then((receipt) => {
-              receipt.wait().then(async (resp) => {
-                const { events } = resp;
-                const transferEvent = events.filter(
-                  (evt) => evt.event === "Transfer"
-                )[0];
-                const tokenId = transferEvent.args.tokenId;
+      console.log({initialNonce});
 
-                const tokenURI = await GamingToken.tokenURI(tokenId);
-                console.log(
-                  `Minted token: TokenId: #${tokenId}\nIdx: ${idx}\nData:${tokenURI}`
-                );
-              });
-            })
-            .catch((error) => {
-              console.error("Connection lost ", error);
-            });
+      for (let idx = 0; idx < 100; idx++) {
+        if (idx % 20 === 0) {
+          await sleep(6000);
         }
-      });
+        const uri = generateRandomTraits();
+
+        const nonce = initialNonce + idx;
+        const mintReceipt = await GamingToken.mint(uri, nonce);
+        const mintResponse = await mintReceipt.wait();
+        const { events } = mintResponse;
+        const transferEvent = events.filter(
+          (evt) => evt.event === "Transfer"
+        )[0];
+
+        const tokenId = transferEvent.args.tokenId;
+
+        const tokenURI = await GamingToken.tokenURI(tokenId);
+        console.log(
+          `Minted token: TokenId: #${tokenId}\nIdx: ${idx}\nData:${tokenURI}`
+        );
+      }
     } catch (err) {
-      console.log("connection lost!", err);
+      console.log("Looks like something went wrong!", err);
     }
   }
 })();
