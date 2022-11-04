@@ -4,8 +4,7 @@ const { ethers } = require('hardhat');
 const abi = require("../abi/"+process.env.ABI_NAME);
 
 async function mint(uri, nonce) {
-
-    const GamingToken = await ethers.getContractAt(abi.erc721_address, abi.erc721_abi);
+    const GamingToken = await ethers.getContractAt('GamingToken', abi.erc721_address);
 
     const res = GamingToken.mint(uri, { nonce });
     return res;
@@ -13,7 +12,7 @@ async function mint(uri, nonce) {
 
 async function tokenURI(tokenId) {
 
-    const GamingToken = await ethers.getContractAt(abi.erc721_address, abi.erc721_abi);
+    const GamingToken = await ethers.getContractAt('GamingToken', abi.erc721_address);
 
     const res = GamingToken.tokenURI(tokenId);
     return res;

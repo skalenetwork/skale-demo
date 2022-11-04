@@ -48,13 +48,11 @@ module.exports = {
     hardhat: {
       blockGasLimit: 12000000
     },
-    custom: {
+    skale: {
         url: getCustomUrl(process.env.ENDPOINT),
         accounts: getCustomPrivateKey(process.env.PRIVATE_KEY),
-        gasPrice: getGasPrice(process.env.GASPRICE)
+        gasPrice: getGasPrice(process.env.GASPRICE),
+        timeout: 60000
     }
-  },
-  etherscan: {
-    apiKey: "QSW5NZN9RCYXSZWVB32DMUN83UZ5EJUREI"
   }
 };

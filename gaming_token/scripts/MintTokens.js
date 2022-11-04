@@ -1,3 +1,4 @@
+const { getAllJSDocTagsOfKind } = require("typescript");
 const GamingToken = require("./GamingToken");
 
 const traits = {
@@ -36,29 +37,19 @@ const sleep = (ms) => {
     try {
       const initialNonce = await GamingToken.getTransactionCount();
 
-      console.log({initialNonce});
 
       for (let idx = 0; idx < 100; idx++) {
-        if (idx % 20 === 0) {
-          await sleep(6000);
+        if (idx % 20 === 0 && idx > 0) {
+          console.log("Sent", idx, "txs");
+          await sleep(2000);
         }
         const uri = generateRandomTraits();
 
         const nonce = initialNonce + idx;
-        const mintReceipt = await GamingToken.mint(uri, nonce);
-        const mintResponse = await mintReceipt.wait();
-        const { events } = mintResponse;
-        const transferEvent = events.filter(
-          (evt) => evt.event === "Transfer"
-        )[0];
-
-        const tokenId = transferEvent.args.tokenId;
-
-        const tokenURI = await GamingToken.tokenURI(tokenId);
-        console.log(
-          `Minted token: TokenId: #${tokenId}\nIdx: ${idx}\nData:${tokenURI}`
-        );
+        GamingToken.mint(uri, nonce);
       }
+      console.log("100 txs sent to the SKALE chain!");
+      console.log("Let's go to block explorer to see them");
     } catch (err) {
       console.log("Looks like something went wrong!", err);
     }

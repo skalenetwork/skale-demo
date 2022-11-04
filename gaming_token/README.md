@@ -42,6 +42,8 @@ npm run createWallet
 ```
 copy the private key from the output to the `.env` file as `PRIVATE_KEY`.
 
+### Get sFUEL in a faucet.
+
 ## Compile and deploy contract
 To compile the contract run 
 ```
@@ -61,7 +63,7 @@ Replace the `CONTRACT_ADDRESS` in the .env with the address from the output of t
 ## Minting NFTs
 To mint the NFTs run
 ```
-npx hardhat run --network custom scripts/MintTokens.js
+npm run mintTokens
 ```
 Expect this script to take ~30 seconds 
 Once done you can check the block explorer to see the NFTs minted .

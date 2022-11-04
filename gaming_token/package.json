@@ -4,10 +4,10 @@
   "description": "Gaming token ERC-721",
   "main": "index.js",
   "scripts": {
-    "createWallet": "npx script/createWallet.js",
+    "createWallet": "node scripts/createWallet.js",
     "compile": "npx hardhat clean && npx hardhat compile",
-    "deploy": "npx hardhat run --network custom ./scripts/deploy.js",
-    "mintTokens": "npx hardhat run --network custom ./scripts/MintTokens.js"
+    "deploy": "npx hardhat run --network skale ./scripts/deploy.js",
+    "mintTokens": "npx hardhat run --network skale ./scripts/MintTokens.js"
   },
   "author": "SKALE",
   "license": "ISC",
