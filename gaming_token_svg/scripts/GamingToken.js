@@ -6,7 +6,7 @@ const abi = require("../abi/"+process.env.ABI_NAME);
 async function mint(uri, nonce) {
     const GamingToken = await ethers.getContractAt('GamingToken', abi.erc721_address);
 
-    const res = GamingToken.mint(uri, { nonce });
+    const res = GamingToken.mint({ nonce });
     return res;
 }
 

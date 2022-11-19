@@ -51,6 +51,28 @@
     {
         "type": "event",
         "anonymous": false,
+        "name": "TokenMinted",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "from",
+                "indexed": false
+            },
+            {
+                "type": "uint256",
+                "name": "tokenId",
+                "indexed": false
+            },
+            {
+                "type": "string",
+                "name": "tokenURI",
+                "indexed": false
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "anonymous": false,
         "name": "Transfer",
         "inputs": [
             {
@@ -108,6 +130,24 @@
     },
     {
         "type": "function",
+        "name": "constructTokenURI",
+        "constant": false,
+        "payable": false,
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "tokenId"
+            }
+        ],
+        "outputs": [
+            {
+                "type": "string",
+                "name": ""
+            }
+        ]
+    },
+    {
+        "type": "function",
         "name": "getApproved",
         "constant": true,
         "stateMutability": "view",
@@ -121,6 +161,20 @@
         "outputs": [
             {
                 "type": "address",
+                "name": ""
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "name": "getRandomNumber",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [],
+        "outputs": [
+            {
+                "type": "uint256",
                 "name": ""
             }
         ]
@@ -153,12 +207,7 @@
         "name": "mint",
         "constant": false,
         "payable": false,
-        "inputs": [
-            {
-                "type": "string",
-                "name": "tokenURI"
-            }
-        ],
+        "inputs": [],
         "outputs": [
             {
                 "type": "uint256",
